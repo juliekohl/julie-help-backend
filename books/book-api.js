@@ -26,10 +26,18 @@ let books = [
     }
 ];
 
+/**
+ * Retrieve all
+ * GET /books
+ */
 app.get('/books', (req, res) => {
     res.json(books);
 });
 
+/**
+ * Retrieve single
+ * GET /book/:isbn
+ */
 app.get('/book/:isbn', (req, res) => {
     const isbn = req.params.isbn;
 
@@ -44,6 +52,10 @@ app.get('/book/:isbn', (req, res) => {
     });
 });
 
+/**
+ * Create
+ * POST /book { isbn, title }
+ */
 app.post('/book', (req, res) => {
     const book = req.body;
     books.push(book);
@@ -51,6 +63,10 @@ app.post('/book', (req, res) => {
     res.send(book);
 });
 
+/**
+ * Update
+ * POST /book/:isbn { title }
+ */
 app.post('/book/:isbn', (req, res) => {
     const isbn = req.params.isbn;
     const newBook = req.body;
@@ -71,6 +87,10 @@ app.post('/book/:isbn', (req, res) => {
     });
 });
 
+/**
+ * Delete
+ * DELETE /book/:isbn
+ */
 app.delete('/book/:isbn', (req, res) => {
     const isbn = req.params.isbn;
 
