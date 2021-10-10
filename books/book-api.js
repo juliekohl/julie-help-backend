@@ -82,7 +82,7 @@ app.post('/book/:isbn', (req, res) => {
         }
     }
 
-    res.send({
+    res.status(404).send({
         message: "Not found"
     });
 });
