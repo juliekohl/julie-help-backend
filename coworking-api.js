@@ -1,40 +1,106 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
+
 const app = express();
 const port = 3000;
 
-let coworkings = [
-    {
-        "name": "Impact",
-    },
-    {
-        "name": "Aldeia",
-    },
-    {
-        "name": "Four",
-    }
-];
-
 app.use(cors());
 
+// Configuring body parser middleware
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
-// create
-app.post('/coworking', (req, res) => {
-    const coworking = req.body;
-    console.log('coworking', coworking);
+let coworkings = [
+    {
+        "id": "275846",
+        "name": "Next Coworking",
+    },
+    {
+        "id": "431818",
+        "name": "Four",
+    },
+    {
+        "id": "965035",
+        "name": "Impact Hub",
+    }
+];
 
-    coworkings.push(coworking);
-    console.log('coworkings', coworkings);
-
-    res.send('Coworking is added to the database');
-});
-
-// get all
-app.get('/coworking', (req, res) => {
+/**
+ * Retrieve all
+ * GET /coworkings
+ */
+app.get('/coworkings', (req, res) => {
     res.json(coworkings);
 });
 
-app.listen(port, () => console.log(`Hello World app listening on port ${port}!`));
+/**
+ * Retrieve single
+ * GET /coworking/:id
+ */
+app.get('/coworking/:id', (req, res) => {
+    const id = req.params.id;
+
+    for (let coworking of coworkings) {
+        if (coworking.id === id) {
+            return res.json(coworking);
+        }
+    }
+
+    res.status(404).send({
+        message: "Not found"
+    });
+});
+
+/**
+ * Create
+ * POST /coworking { id, name }
+ */
+app.post('/coworking', (req, res) => {
+    const coworking = req.body;
+    coworkings.push(coworking);
+
+    res.send(coworking);
+});
+
+/**
+ * Update
+ * POST /coworking/:id { name }
+ */
+app.post('/coworking/:id', (req, res) => {
+    const id = req.params.id;
+    const newCoworking = req.body;
+
+    for (let i = 0; i < coworkings.length; i++) {
+        let coworking = coworkings[i]
+        if (coworking.id === id) {
+            coworkings[i].name = newCoworking.name;
+
+            return res.send({
+                message: "Updated"
+            });
+        }
+    }
+
+    res.status(404).send({
+        message: "Not found"
+    });
+});
+
+/**
+ * Delete
+ * DELETE /coworking/:id
+ */
+app.delete('/coworking/:id', (req, res) => {
+    const id = req.params.id;
+
+    coworkings = coworkings.filter(i => {
+        return i.id !== id;
+    });
+
+    res.send({
+        message: "Deleted"
+    });
+});
+
+app.listen(port, () => console.log(`Coworkings listening on port ${port}!`));
