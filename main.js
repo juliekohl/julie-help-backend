@@ -20,9 +20,11 @@ app.use(bodyParser.json());
 
 const apiCoworkings = require('./src/api/coworkings');
 const apiTeams = require('./src/api/teams');
+const apiCoworkers = require('./src/api/coworkers');
 
 apiCoworkings(app, database);
 apiTeams(app, database);
+apiCoworkers(app, database);
 
 /**
  * Start Server
