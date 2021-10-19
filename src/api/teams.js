@@ -3,92 +3,150 @@ const apiTeams = (app, database) => {
      * Retrieve all
      * GET /teams
      */
-    app.get('/teams', (req, res) => {
-        database
-            .select("*")
-            .into("teams")
-            .then(result => {
-                res.json(result);
-                console.log('Retrieve result', result);
-            }).catch(err => {
-            res.json(err);
-        });
+    app.get('/teams', async (req, res) => {
+        try {
+            const teamId = req.body.team_id;
+
+            // Get coworking_id
+            const team = await  database
+                .select("coworking_id")
+                .table("teams")
+                .where({id: teamId});
+
+            const teamResult = await team;
+            const coworkingId = teamResult[0].coworking_id;
+
+            // Get teams of coworking_id
+            const teams = await  database
+                .select("teams.id","name", "email")
+                .table("teams")
+                .where({coworking_id: coworkingId})
+                .join("users", "teams.user_id", "=", "users.id")
+
+            res.json(teams);
+        } catch (err) {
+            res.json({ message: err.sqlMessage });
+        }
     });
 
     /**
      * Retrieve single
      * GET /team/:id
      */
-    app.get('/team/:id', (req, res) => {
-        const id = req.params.id;
-        database
-            .select("*")
-            .table("teams")
-            .where('id', id)
-            .orderBy("id", "asc")
-            .then(result => {
-                res.json(result);
-            })
-            .catch(err => {
-                res.json(err);
-            });
+    app.get('/team/:id', async (req, res) => {
+        try {
+            const id = req.params.id;
+
+            // Select Team
+            let team = await database
+                .select("user_id")
+                .table("teams")
+                .where({id: id})
+
+            const teamResult = await team;
+            const userId = teamResult[0].user_id;
+
+            // Retrieve User
+            const user = await database
+                .select("name", "email")
+                .table("users")
+                .where({id: userId})
+
+            const userResult = await user;
+            res.json(userResult[0]);
+        } catch (err) {
+            res.json({ message: err.sqlMessage });
+        }
     });
 
     /**
      * Create
-     * POST /team { id, name, email, password }
+     * POST /team { coworking_id, user_id }
      */
-    app.post('/team', (req, res) => {
-        const team = req.body;
-        console.log('team', team);
-        database
-            .insert(team)
-            .into("teams")
-            .then(result => {
-                res.json(result);
-                console.log('result', result);
-            }).catch(err => {
-            res.json(err);
-            console.log('err', err);
-        });
+    app.post('/team', async (req, res) => {
+        try {
+            // Create User
+            let createUser = await database
+                .insert({
+                    name: req.body.name,
+                    email: req.body.email,
+                    password: req.body.password
+                })
+                .into("users");
+
+            const userId = await createUser;
+
+            // Create team
+            await database
+                .insert({
+                    coworking_id: req.body.coworking_id,
+                    user_id: userId,
+                })
+                .into("teams");
+
+            res.json({ message: 'Success' });
+        } catch(err) {
+            res.json({ message: err.sqlMessage });
+        }
     });
 
     /**
      * Update
-     * POST /team/:id { name }
+     * POST /team/:id { coworking_id, user_id }
      */
-    app.post('/team/:id', (req, res) => {
-        const id = req.params.id;
-        const newData = req.body;
+    app.post('/team/:id', async (req, res) => {
+        try {
+            const id = req.params.id;
 
-        database
-            .update(newData)
-            .table("teams")
-            .where({id: id})
-            .then(result => {
-                res.json(result);
-            }).catch(err => {
-            res.json(err);
-        });
+            // Select Team
+            let team = await database
+                .select("user_id")
+                .table("teams")
+                .where({id: id})
+
+            const teamResult = await team;
+            const userId = teamResult[0].user_id;
+
+            // Update User
+            await database
+                .update({
+                    name: req.body.name,
+                    password: req.body.password
+                })
+                .table("users")
+                .where({id: userId})
+
+            res.json({ message: 'Success' });
+        } catch (err) {
+            res.json({ message: err.sqlMessage });
+        }
     });
 
     /**
      * Delete
      * DELETE /team/:id
      */
-    app.delete('/team/:id', (req, res) => {
-        const id = req.params.id;
+    app.delete('/team/:id', async (req, res) => {
+        try {
+            const id = req.params.id;
 
-        database
-            .delete()
-            .table("teams")
-            .where({id: id})
-            .then(result => {
-                res.json(result);
-            })
-            .catch(err => {
-                res.json(err);
-            });
+            // Select Team
+            let team = await database
+                .select("user_id")
+                .table("teams")
+                .where({id: id})
+
+            const teamResult = await team;
+            const userId = teamResult[0].user_id;
+
+            // Delete
+            await database.delete().table("teams").where( {id: id})
+            await database.delete().table("users").where( {id: userId})
+
+            res.json({ message: 'Success' });
+        } catch (err) {
+            res.json({ message: err });
+        }
     });
 }
 
