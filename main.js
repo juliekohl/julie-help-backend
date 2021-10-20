@@ -6,6 +6,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
 const database = require("./src/database/database");
+const crypto = require('crypto');
 
 const app = express();
 const port = 3000;
@@ -23,8 +24,8 @@ const apiTeams = require('./src/api/teams');
 const apiCoworkers = require('./src/api/coworkers');
 
 apiCoworkings(app, database);
-apiTeams(app, database);
-apiCoworkers(app, database);
+apiTeams(app, database, crypto);
+apiCoworkers(app, database, crypto);
 
 /**
  * Start Server

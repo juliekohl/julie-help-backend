@@ -1,4 +1,4 @@
-const apiTeams = (app, database) => {
+const apiTeams = (app, database, crypto) => {
     /**
      * Retrieve all
      * GET /teams
@@ -65,12 +65,15 @@ const apiTeams = (app, database) => {
      */
     app.post('/team', async (req, res) => {
         try {
+            let password = req.body.password;
+            let hash = crypto.createHash('md5').update(password).digest('hex');
+
             // Create User
             let createUser = await database
                 .insert({
                     name: req.body.name,
                     email: req.body.email,
-                    password: req.body.password
+                    password: hash
                 })
                 .into("users");
 
