@@ -5,21 +5,25 @@ const apiCoworkers = (app, database) => {
      */
     app.get('/coworkers', async (req, res) => {
         try {
+            const coworkerId = req.body.coworker_id;
+
             // Select Coworker
             let coworker = await database
-                .select("user_id")
+                .select("coworking_id")
                 .table("coworkers")
+                .where({id: coworkerId});
 
             const coworkerResult = await coworker;
-            const userId = coworkerResult[0].user_id;
+            const coworkingId = coworkerResult[0].coworking_id;
 
-            // Retrieve User
-            await database
-                .select("name", "email")
-                .table("users")
-                .then(result => {
-                    res.json(result);
-                })
+            // Retrieve Coworker of coworking_id
+            const coworkers = await database
+                .select("coworkers.id", "name", "email")
+                .table("coworkers")
+                .where({coworking_id: coworkingId})
+                .join("users", "coworkers.user_id", "=", "users.id")
+
+            res.json(coworkers);
         } catch (err) {
             res.json({ message: err.sqlMessage });
         }
@@ -30,9 +34,9 @@ const apiCoworkers = (app, database) => {
      * GET /coworker/:id
      */
     app.get('/coworker/:id', async (req, res) => {
-        const id = req.params.id;
-
         try {
+            const id = req.params.id;
+
             // Select Coworker
             let coworker = await database
                 .select("user_id")
@@ -43,13 +47,13 @@ const apiCoworkers = (app, database) => {
             const userId = coworkerResult[0].user_id;
 
             // Retrieve User
-            await database
+           const user = await database
                 .select("name", "email")
                 .table("users")
                 .where({id: userId})
-                .then(result => {
-                    res.json(result);
-                })
+
+            const userResult = await user;
+            res.json(userResult[0]);
         } catch (err) {
             res.json({ message: err.sqlMessage });
         }
@@ -91,9 +95,9 @@ const apiCoworkers = (app, database) => {
      * POST /coworker/:id { coworking_id, user_id }
      */
     app.post('/coworker/:id', async (req, res) => {
-        const id = req.params.id;
-
         try {
+            const id = req.params.id;
+
             // Select Coworker
             let coworker = await database
                 .select("user_id")
@@ -123,9 +127,9 @@ const apiCoworkers = (app, database) => {
      * DELETE /coworker/:id
      */
     app.delete('/coworker/:id', async (req, res) => {
-        const id = req.params.id;
-
         try {
+            const id = req.params.id;
+
             // Select Coworker
             let coworker = await database
                 .select("user_id")
@@ -136,11 +140,10 @@ const apiCoworkers = (app, database) => {
             const userId = coworkerResult[0].user_id;
 
             // Delete User
-            // await database.delete().table("coworkers").where( {id: id})
-            //todo
+            await database.delete().table("coworkers").where( {id: id})
             await database.delete().table("users").where( {id: userId})
 
-            res.json({ message: 'Success deleted' });
+            res.json({ message: 'Success' });
         } catch (err) {
             res.json({ message: err.sqlMessage });
         }
