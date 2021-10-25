@@ -5,7 +5,7 @@ const apiTeams = (app, database, crypto) => {
      */
     app.get('/teams', async (req, res) => {
         try {
-            const teamId = req.body.team_id;
+            const teamId = req.query.team_id;
 
             // Get coworking_id
             const team = await  database
