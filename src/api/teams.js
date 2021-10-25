@@ -33,7 +33,7 @@ const apiTeams = (app, database, crypto) => {
      * Retrieve single
      * GET /team/:id
      */
-    app.get('/team/:id', async (req, res) => {
+    app.get('/teams/:id', async (req, res) => {
         try {
             const id = req.params.id;
 
@@ -63,7 +63,7 @@ const apiTeams = (app, database, crypto) => {
      * Create
      * POST /team { coworking_id, user_id }
      */
-    app.post('/team', async (req, res) => {
+    app.post('/teams', async (req, res) => {
         try {
             let password = req.body.password;
             let hash = crypto.createHash('md5').update(password).digest('hex');
@@ -97,7 +97,7 @@ const apiTeams = (app, database, crypto) => {
      * Update
      * POST /team/:id { coworking_id, user_id }
      */
-    app.post('/team/:id', async (req, res) => {
+    app.post('/teams/:id', async (req, res) => {
         try {
             const id = req.params.id;
 
@@ -129,7 +129,7 @@ const apiTeams = (app, database, crypto) => {
      * Delete
      * DELETE /team/:id
      */
-    app.delete('/team/:id', async (req, res) => {
+    app.delete('/teams/:id', async (req, res) => {
         try {
             const id = req.params.id;
 
