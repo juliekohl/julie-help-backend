@@ -1,11 +1,11 @@
-const apiCoworkers = (app, database, crypto) => {
+const coworkers = (app, database, crypto): void => {
     /**
      * Retrieve all
      * GET /coworkers
      */
     app.get('/coworkers', async (req, res) => {
         try {
-            const coworkerId = req.body.coworker_id;
+            const coworkerId: string = req.body.coworker_id;
 
             // Select Coworker
             let coworker = await database
@@ -14,7 +14,7 @@ const apiCoworkers = (app, database, crypto) => {
                 .where({id: coworkerId});
 
             const coworkerResult = await coworker;
-            const coworkingId = coworkerResult[0].coworking_id;
+            const coworkingId: string = coworkerResult[0].coworking_id;
 
             // Retrieve Coworker of coworking_id
             const coworkers = await database
@@ -35,7 +35,7 @@ const apiCoworkers = (app, database, crypto) => {
      */
     app.get('/coworker/:id', async (req, res) => {
         try {
-            const id = req.params.id;
+            const id: string = req.params.id;
 
             // Select Coworker
             let coworker = await database
@@ -44,7 +44,7 @@ const apiCoworkers = (app, database, crypto) => {
                 .where({id: id})
 
             const coworkerResult = await coworker;
-            const userId = coworkerResult[0].user_id;
+            const userId: string = coworkerResult[0].user_id;
 
             // Retrieve User
            const user = await database
@@ -65,8 +65,8 @@ const apiCoworkers = (app, database, crypto) => {
      */
     app.post('/coworker', async (req, res) => {
         try {
-            let password = req.body.password;
-            let hash = crypto.createHash('md5').update(password).digest('hex');
+            let password: string = req.body.password;
+            let hash: string = crypto.createHash('md5').update(password).digest('hex');
 
             // Create User
             let createUser = await database
@@ -99,7 +99,7 @@ const apiCoworkers = (app, database, crypto) => {
      */
     app.post('/coworker/:id', async (req, res) => {
         try {
-            const id = req.params.id;
+            const id: string = req.params.id;
 
             // Select Coworker
             let coworker = await database
@@ -108,7 +108,7 @@ const apiCoworkers = (app, database, crypto) => {
                 .where({id: id})
 
             const coworkerResult = await coworker;
-            const userId = coworkerResult[0].user_id;
+            const userId: string = coworkerResult[0].user_id;
 
             // Update User
             await database
@@ -131,7 +131,7 @@ const apiCoworkers = (app, database, crypto) => {
      */
     app.delete('/coworker/:id', async (req, res) => {
         try {
-            const id = req.params.id;
+            const id: string = req.params.id;
 
             // Select Coworker
             let coworker = await database
@@ -140,7 +140,7 @@ const apiCoworkers = (app, database, crypto) => {
                 .where({id: id})
 
             const coworkerResult = await coworker;
-            const userId = coworkerResult[0].user_id;
+            const userId: string = coworkerResult[0].user_id;
 
             // Delete User
             await database.delete().table("coworkers").where( {id: id})
@@ -153,4 +153,4 @@ const apiCoworkers = (app, database, crypto) => {
     });
 }
 
-module.exports = apiCoworkers;
+module.exports = coworkers;

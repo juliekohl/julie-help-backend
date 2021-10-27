@@ -1,23 +1,23 @@
-const apiTeams = (app, database, crypto) => {
+const teams = (app, database, crypto): void => {
     /**
      * Retrieve all
      * GET /teams
      */
     app.get('/teams', async (req, res) => {
         try {
-            const teamId = req.query.team_id;
+            const teamId: string = req.query.team_id;
 
             // Get coworking_id
-            const team = await  database
+            const team = await database
                 .select("coworking_id")
                 .table("teams")
                 .where({id: teamId});
 
             const teamResult = await team;
-            const coworkingId = teamResult[0].coworking_id;
+            const coworkingId: string = teamResult[0].coworking_id;
 
             // Get teams of coworking_id
-            const teams = await  database
+            const teams = await database
                 .select("teams.id","name", "email")
                 .table("teams")
                 .where({coworking_id: coworkingId})
@@ -35,7 +35,7 @@ const apiTeams = (app, database, crypto) => {
      */
     app.get('/teams/:id', async (req, res) => {
         try {
-            const id = req.params.id;
+            const id: string = req.params.id;
 
             // Select Team
             let team = await database
@@ -44,7 +44,7 @@ const apiTeams = (app, database, crypto) => {
                 .where({id: id})
 
             const teamResult = await team;
-            const userId = teamResult[0].user_id;
+            const userId: string = teamResult[0].user_id;
 
             // Retrieve User
             const user = await database
@@ -65,8 +65,8 @@ const apiTeams = (app, database, crypto) => {
      */
     app.post('/teams', async (req, res) => {
         try {
-            let password = req.body.password;
-            let hash = crypto.createHash('md5').update(password).digest('hex');
+            let password: string = req.body.password;
+            let hash: string = crypto.createHash('md5').update(password).digest('hex');
 
             // Create User
             let createUser = await database
@@ -99,7 +99,7 @@ const apiTeams = (app, database, crypto) => {
      */
     app.post('/teams/:id', async (req, res) => {
         try {
-            const id = req.params.id;
+            const id: string = req.params.id;
 
             // Select Team
             let team = await database
@@ -108,7 +108,7 @@ const apiTeams = (app, database, crypto) => {
                 .where({id: id})
 
             const teamResult = await team;
-            const userId = teamResult[0].user_id;
+            const userId: string = teamResult[0].user_id;
 
             // Update User
             await database
@@ -131,7 +131,7 @@ const apiTeams = (app, database, crypto) => {
      */
     app.delete('/teams/:id', async (req, res) => {
         try {
-            const id = req.params.id;
+            const id: string = req.params.id;
 
             // Select Team
             let team = await database
@@ -140,7 +140,7 @@ const apiTeams = (app, database, crypto) => {
                 .where({id: id})
 
             const teamResult = await team;
-            const userId = teamResult[0].user_id;
+            const userId: string = teamResult[0].user_id;
 
             // Delete
             await database.delete().table("teams").where( {id: id})
@@ -153,4 +153,4 @@ const apiTeams = (app, database, crypto) => {
     });
 }
 
-module.exports = apiTeams;
+module.exports = teams;
