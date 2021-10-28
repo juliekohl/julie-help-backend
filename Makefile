@@ -6,5 +6,5 @@ setup-docker:
 .PHONY: run-server
 run-server:
 	@echo "+ $@"
-	@node main.ts
+	@npx ts-node main.ts
 
