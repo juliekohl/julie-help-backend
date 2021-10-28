@@ -41,7 +41,7 @@ const teams = (app, database, crypto) => {
             let team = await database
                 .select("user_id")
                 .table("teams")
-                .where({id: id})
+                .where({id})
 
             const teamResult = await team;
             const userId = teamResult[0].user_id;
@@ -105,7 +105,7 @@ const teams = (app, database, crypto) => {
             let team = await database
                 .select("user_id")
                 .table("teams")
-                .where({id: id})
+                .where({id})
 
             const teamResult = await team;
             const userId = teamResult[0].user_id;
@@ -140,14 +140,14 @@ const teams = (app, database, crypto) => {
             let team = await database
                 .select("user_id")
                 .table("teams")
-                .where({id: id})
+                .where({id})
 
             const teamResult = await team;
             const userId = teamResult[0].user_id;
 
             // Delete
-            await database.delete().table("teams").where( {id: id})
-            await database.delete().table("users").where( {id: userId})
+            await database.delete().table("teams").where({id})
+            await database.delete().table("users").where({id: userId})
 
             res.json({ message: 'Success' });
         } catch (err) {
