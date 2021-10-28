@@ -5,11 +5,11 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const database = require("./src/database/database");
+const database = require("./src/database/database.ts");
 const libCrypto = require('crypto');
 
 const app = express();
-const port: number = 3000;
+const port = 3000;
 
 app.use(cors());
 app.use(bodyParser.urlencoded({ extended: false }));
@@ -19,9 +19,9 @@ app.use(bodyParser.json());
  * Load API endpoints
  */
 
-const apiCoworkings = require('./src/api/coworkings');
-const apiTeams = require('./src/api/teams');
-const apiCoworkers = require('./src/api/coworkers');
+const apiCoworkings = require('./src/api/coworkings.ts');
+const apiTeams = require('./src/api/teams.ts');
+const apiCoworkers = require('./src/api/coworkers.ts');
 
 apiCoworkings(app, database);
 apiTeams(app, database, libCrypto);
