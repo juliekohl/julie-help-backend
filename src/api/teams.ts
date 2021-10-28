@@ -111,10 +111,13 @@ const teams = (app, database, crypto) => {
             const userId = teamResult[0].user_id;
 
             // Update User
-            await database
+            let password = req.body.password;
+            let hash = crypto.createHash('md5').update(password).digest('hex');
+
+             await database
                 .update({
                     name: req.body.name,
-                    password: req.body.password
+                    password: hash
                 })
                 .table("users")
                 .where({id: userId})
