@@ -5,7 +5,7 @@ const coworkers = (app, database, crypto) => {
      */
     app.get('/coworkers', async (req, res) => {
         try {
-            const coworkerId = req.body.coworker_id;
+            const coworkerId: number = Number(req.query.coworker_id);
 
             // Select Coworker
             let coworker = await database
@@ -14,7 +14,7 @@ const coworkers = (app, database, crypto) => {
                 .where({id: coworkerId});
 
             const coworkerResult = await coworker;
-            const coworkingId = coworkerResult[0].coworking_id;
+            const coworkingId: number = coworkerResult[0].coworking_id;
 
             // Retrieve Coworker of coworking_id
             const coworkers = await database
@@ -35,16 +35,16 @@ const coworkers = (app, database, crypto) => {
      */
     app.get('/coworker/:id', async (req, res) => {
         try {
-            const id = req.params.id;
+            const id: number = Number(req.params.id);
 
             // Select Coworker
             let coworker = await database
                 .select("user_id")
                 .table("coworkers")
-                .where({id: id})
+                .where({id})
 
             const coworkerResult = await coworker;
-            const userId = coworkerResult[0].user_id;
+            const userId: number = coworkerResult[0].user_id;
 
             // Retrieve User
            const user = await database
@@ -65,8 +65,8 @@ const coworkers = (app, database, crypto) => {
      */
     app.post('/coworker', async (req, res) => {
         try {
-            let password = req.body.password;
-            let hash = crypto.createHash('md5').update(password).digest('hex');
+            let password: string = req.body.password;
+            let hash: string = crypto.createHash('md5').update(password).digest('hex');
 
             // Create User
             let createUser = await database
@@ -99,22 +99,25 @@ const coworkers = (app, database, crypto) => {
      */
     app.post('/coworker/:id', async (req, res) => {
         try {
-            const id = req.params.id;
+            const id: number = Number(req.params.id);
 
             // Select Coworker
             let coworker = await database
                 .select("user_id")
                 .table("coworkers")
-                .where({id: id})
+                .where({id})
 
             const coworkerResult = await coworker;
-            const userId = coworkerResult[0].user_id;
+            const userId: number = coworkerResult[0].user_id;
 
             // Update User
+            let password: string = req.body.password;
+            let hash: string = crypto.createHash('md5').update(password).digest('hex');
+
             await database
                 .update({
                     name: req.body.name,
-                    password: req.body.password
+                    password: hash
                 })
                 .table("users")
                 .where({id: userId})
@@ -131,20 +134,20 @@ const coworkers = (app, database, crypto) => {
      */
     app.delete('/coworker/:id', async (req, res) => {
         try {
-            const id = req.params.id;
+            const id: number = Number(req.params.id);
 
             // Select Coworker
             let coworker = await database
                 .select("user_id")
                 .table("coworkers")
-                .where({id: id})
+                .where({id})
 
             const coworkerResult = await coworker;
-            const userId = coworkerResult[0].user_id;
+            const userId: number = coworkerResult[0].user_id;
 
             // Delete User
-            await database.delete().table("coworkers").where( {id: id})
-            await database.delete().table("users").where( {id: userId})
+            await database.delete().table("coworkers").where({id})
+            await database.delete().table("users").where({id: userId})
 
             res.json({ message: 'Success' });
         } catch (err) {
