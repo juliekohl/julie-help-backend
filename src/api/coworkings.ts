@@ -19,7 +19,8 @@ const coworkings = (app, database) => {
      * GET /coworking/:id
      */
     app.get('/coworking/:id', (req, res) => {
-        const id = req.params.id;
+        const id: number = Number(req.params.id);
+
         database
             .select("*")
             .table("coworkings")
@@ -38,7 +39,8 @@ const coworkings = (app, database) => {
      * POST /coworking { id, name }
      */
     app.post('/coworking', (req, res) => {
-        const coworking = req.body;
+        const coworking: object = req.body;
+
         database
             .insert(coworking)
             .into("coworkings")
@@ -54,13 +56,13 @@ const coworkings = (app, database) => {
      * POST /coworking/:id { name }
      */
     app.post('/coworking/:id', (req, res) => {
-        const id = req.params.id;
-        const newData = req.body;
+        const id: number = Number(req.params.id);
+        const newData: object = req.body;
 
         database
             .update(newData)
             .table("coworkings")
-            .where({id: id})
+            .where({id})
             .then(result => {
                 res.json(result);
             }).catch(err => {
@@ -73,12 +75,12 @@ const coworkings = (app, database) => {
      * DELETE /coworking/:id
      */
     app.delete('/coworking/:id', (req, res) => {
-        const id = req.params.id;
+        const id: number = Number(req.params.id);
 
         database
             .delete()
             .table("coworkings")
-            .where({id: id})
+            .where({id})
             .then(result => {
                 res.json(result);
             })
