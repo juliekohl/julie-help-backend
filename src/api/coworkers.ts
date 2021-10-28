@@ -31,9 +31,9 @@ const coworkers = (app, database, crypto) => {
 
     /**
      * Retrieve single
-     * GET /coworker/:id
+     * GET /coworkers/:id
      */
-    app.get('/coworker/:id', async (req, res) => {
+    app.get('/coworkers/:id', async (req, res) => {
         try {
             const id: number = Number(req.params.id);
 
@@ -61,9 +61,9 @@ const coworkers = (app, database, crypto) => {
 
     /**
      * Create
-     * POST /coworker { coworking_id, user_id }
+     * POST /coworkers { coworking_id, user_id }
      */
-    app.post('/coworker', async (req, res) => {
+    app.post('/coworkers', async (req, res) => {
         try {
             let password: string = req.body.password;
             let hash: string = crypto.createHash('md5').update(password).digest('hex');
@@ -95,9 +95,9 @@ const coworkers = (app, database, crypto) => {
 
     /**
      * Update
-     * POST /coworker/:id { coworking_id, user_id }
+     * POST /coworkers/:id { coworking_id, user_id }
      */
-    app.post('/coworker/:id', async (req, res) => {
+    app.post('/coworkers/:id', async (req, res) => {
         try {
             const id: number = Number(req.params.id);
 
@@ -130,9 +130,9 @@ const coworkers = (app, database, crypto) => {
 
     /**
      * Delete
-     * DELETE /coworker/:id
+     * DELETE /coworkers/:id
      */
-    app.delete('/coworker/:id', async (req, res) => {
+    app.delete('/coworkers/:id', async (req, res) => {
         try {
             const id: number = Number(req.params.id);
 
