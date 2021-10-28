@@ -1,9 +1,9 @@
-const apiCoworkings = (app, database) => {
+const coworkings = (app, database): void => {
     /**
      * Retrieve all
      * GET /coworkings
      */
-    app.get('/coworkings', (req, res) => {
+    app.get('/coworkings', (req, res): void => {
         database
             .select("*")
             .into("coworkings")
@@ -18,8 +18,8 @@ const apiCoworkings = (app, database) => {
      * Retrieve single
      * GET /coworking/:id
      */
-    app.get('/coworking/:id', (req, res) => {
-        const id = req.params.id;
+    app.get('/coworking/:id', (req, res): void => {
+        const id: string = req.params.id;
         database
             .select("*")
             .table("coworkings")
@@ -37,8 +37,8 @@ const apiCoworkings = (app, database) => {
      * Create
      * POST /coworking { id, name }
      */
-    app.post('/coworking', (req, res) => {
-        const coworking = req.body;
+    app.post('/coworking', (req, res): void => {
+        const coworking: string = req.body;
         database
             .insert(coworking)
             .into("coworkings")
@@ -53,9 +53,9 @@ const apiCoworkings = (app, database) => {
      * Update
      * POST /coworking/:id { name }
      */
-    app.post('/coworking/:id', (req, res) => {
-        const id = req.params.id;
-        const newData = req.body;
+    app.post('/coworking/:id', (req, res): void => {
+        const id: string = req.params.id;
+        const newData: string = req.body;
 
         database
             .update(newData)
@@ -72,8 +72,8 @@ const apiCoworkings = (app, database) => {
      * Delete
      * DELETE /coworking/:id
      */
-    app.delete('/coworking/:id', (req, res) => {
-        const id = req.params.id;
+    app.delete('/coworking/:id', (req, res): void => {
+        const id: string = req.params.id;
 
         database
             .delete()
@@ -88,4 +88,4 @@ const apiCoworkings = (app, database) => {
     });
 }
 
-module.exports = apiCoworkings;
+module.exports = coworkings;
