@@ -111,14 +111,21 @@ const coworkers = (app, database, crypto) => {
             const userId: number = coworkerResult[0].user_id;
 
             // Update User
-            let password: string = req.body.password;
-            let hash: string = crypto.createHash('md5').update(password).digest('hex');
+            const update: { name?: string; password?: string } = {
+                name: req.body.name
+            };
+            if(req.body.name) {
+                update.name
+            }
+            if(req.body.password) {
+                update.password = crypto
+                    .createHash('md5')
+                    .update(req.body.password)
+                    .digest('hex');
+            }
 
             await database
-                .update({
-                    name: req.body.name,
-                    password: hash
-                })
+                .update(update)
                 .table("users")
                 .where({id: userId})
 
