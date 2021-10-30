@@ -22,6 +22,16 @@ install:
 	@npm install
 
 #
+# Build DB
+#
+.PHONY: build-db
+build-db:
+	@echo "+ $@"
+	@make rollback
+	@make migrate
+	@make seed
+
+#
 # Run Express server
 #
 .PHONY: run-server
