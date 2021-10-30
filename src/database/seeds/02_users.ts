@@ -10,7 +10,9 @@ export async function seed(knex: Knex): Promise<void> {
         .update('secret')
         .digest('hex');
 
+    await knex.raw('SET foreign_key_checks = 0');
     await knex("users").truncate();
+    await knex.raw('SET foreign_key_checks = 1');
 
     for (let i = 1; i <= rowsTotal; i++) {
         rows.push({
