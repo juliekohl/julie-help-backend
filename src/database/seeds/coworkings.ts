@@ -1,4 +1,5 @@
 import { Knex } from "knex";
+import faker from 'faker';
 
 export async function seed(knex: Knex): Promise<void> {
     const rows = [];
@@ -8,7 +9,7 @@ export async function seed(knex: Knex): Promise<void> {
 
     for (let i = 1; i <= rowsTotal; i++) {
         rows.push({
-            name: 'Test'
+            name: faker.company.companyName()
         });
     }
 
