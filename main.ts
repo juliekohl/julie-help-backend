@@ -5,7 +5,7 @@
 const express = require('express');
 const bodyParser = require('body-parser');
 const cors = require('cors');
-const database = require("./src/database/database.ts");
+const database = require("./src/database");
 const libCrypto = require('crypto');
 
 const app = express();
