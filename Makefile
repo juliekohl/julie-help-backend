@@ -77,7 +77,7 @@ rollback:
 .PHONY: create-seed-file
 create-seed-file:
 	@echo "+ $@"
-	@knex seed:make $(name) -x ts --knex-file src/database/knexfile.ts
+	@knex seed:make $(name) -x ts --knexfile src/database/knexfile.ts
 
 #
 # Seed
