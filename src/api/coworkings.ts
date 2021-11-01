@@ -90,4 +90,8 @@ const coworkings = (app, database) => {
     });
 }
 
+export function sum(a, b) {
+    return a
+}
+
 module.exports = coworkings;
