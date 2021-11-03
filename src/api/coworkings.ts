@@ -27,7 +27,7 @@ const coworkings = (app, database) => {
             .where('id', id)
             .orderBy("name", "asc")
             .then(result => {
-                res.json(result);
+                res.json(result[0]);
             })
             .catch(err => {
                 res.json(err);
@@ -45,7 +45,7 @@ const coworkings = (app, database) => {
             .insert(coworking)
             .into("coworkings")
             .then(result => {
-                res.json(result);
+                res.json(result[0]);
             }).catch(err => {
             res.json(err);
         });
@@ -90,8 +90,4 @@ const coworkings = (app, database) => {
     });
 }
 
-export function sum(a, b) {
-    return a
-}
-
-module.exports = coworkings;
+export default coworkings

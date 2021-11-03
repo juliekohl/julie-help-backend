@@ -163,4 +163,4 @@ const coworkers = (app, database, crypto) => {
     });
 }
 
-module.exports = coworkers;
+export default coworkers
