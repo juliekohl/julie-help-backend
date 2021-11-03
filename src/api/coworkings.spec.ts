@@ -32,8 +32,6 @@ describe("coworkings", () => {
 
     it("should delete a coworking by its id", async () => {
         const response = await request(app).delete("/coworking/1")
-        console.log('response.body',response.body);
-        console.log('response.body',typeof response.body);
-        expect(typeof response.body).toBe("object");
+        expect(response.body.message).toBe("Success");
     })
 })

@@ -74,47 +74,65 @@ const coworkings = (app, database) => {
      * Delete
      * DELETE /coworking/:id
      */
-    // app.delete('/coworking/:id', (req, res) => {
-    //     const id: number = Number(req.params.id);
-    //
-    //     database
-    //         .delete()
-    //         .table("coworkings")
-    //         .where({id})
-    //         .then(result => {
-    //             res.json(result);
-    //         })
-    //         .catch(err => {
-    //             res.json(err);
-    //         });
-    //
-    // });
+
     app.delete('/coworking/:id', async (req, res) => {
         try {
             const id: number = Number(req.params.id);
 
-            // Select Coworker User
-            let coworker = await database
+            /**
+             * Delete coworkers
+             */
+
+            await database.delete().table("coworkers").where({
+                coworking_id: id
+            })
+
+            /**
+             * Delete coworkers users
+             */
+
+            let coworkers = await database
                 .select("user_id")
                 .table("coworkers")
-                .where({id})
+                .where({coworking_id: id})
 
-            const coworkerResult = await coworker;
-            const userCoworkerId: number = coworkerResult[0].user_id;
+            const coworkersResult = await coworkers;
 
-            // Select Coworker Cwk
-            let cwkr = await database
-                .select("coworking_id")
-                .table("coworkers")
-                .where({id})
+            for (const i in coworkersResult) {
+                await database.delete().table("users").where({
+                    id: coworkersResult[i].user_id
+                })
+            }
 
-            const coworkerResults = await cwkr;
-            const cwkCoworkerId: number = coworkerResults[0].coworking_id;
+            /**
+             * Delete teams
+             */
 
-            // Delete
-            await database.delete().table("coworkers").where({id})
-            await database.delete().table("users").where({id: userCoworkerId})
-            await database.delete().table("users").where({id: cwkCoworkerId})
+            await database.delete().table("teams").where({
+                coworking_id: id
+            })
+
+            /**
+             * Delete teams users
+             */
+
+            let teams = await database
+                .select("user_id")
+                .table("teams")
+                .where({coworking_id: id})
+
+            const teamsResult = await teams;
+
+            for (const i in teamsResult) {
+                await database.delete().table("users").where({
+                    id: teamsResult[i].user_id
+                })
+            }
+
+            /**
+             * Delete coworking
+             */
+
             await database.delete().table("coworkings").where({id})
 
             res.json({message: 'Success'});
