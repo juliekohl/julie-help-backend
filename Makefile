@@ -37,7 +37,7 @@ build-db:
 .PHONY: run-server
 run-server:
 	@echo "+ $@"
-	@npx ts-node main.ts
+	@npx ts-node src/server.ts
 
 #--------------------------------------------------------------------------
 # Migrations

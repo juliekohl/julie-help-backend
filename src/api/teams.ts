@@ -165,4 +165,4 @@ const teams = (app, database, crypto) => {
     });
 }
 
-module.exports = teams;
+export default teams
