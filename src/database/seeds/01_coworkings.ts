@@ -1,13 +1,12 @@
 import { Knex } from "knex";
 import faker from 'faker';
+import {knexTruncate} from "../../shared/knex-truncate";
 
 export async function seed(knex: Knex): Promise<void> {
     const rows = [];
     const rowsTotal = 10;
 
-    await knex.raw('SET foreign_key_checks = 0');
-    await knex("coworkings").truncate();
-    await knex.raw('SET foreign_key_checks = 1');
+    await knexTruncate(knex, "coworkings");
 
     for (let i = 1; i <= rowsTotal; i++) {
         rows.push({
