@@ -1,6 +1,7 @@
 import { Knex } from "knex";
 import faker from 'faker';
 import crypto from 'crypto';
+import {knexTruncate} from "../../shared/knex-truncate";
 
 export async function seed(knex: Knex): Promise<void> {
     const rows = [];
@@ -10,9 +11,7 @@ export async function seed(knex: Knex): Promise<void> {
         .update('secret')
         .digest('hex');
 
-    await knex.raw('SET foreign_key_checks = 0');
-    await knex("users").truncate();
-    await knex.raw('SET foreign_key_checks = 1');
+    await knexTruncate(knex, "users");
 
     for (let i = 1; i <= rowsTotal; i++) {
         rows.push({
