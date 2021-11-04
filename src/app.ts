@@ -8,6 +8,8 @@ import cors from 'cors';
 const database = require("./database");
 import libCrypto from 'crypto';
 
+require("dotenv").config()
+
 const app = express();
 
 app.use(cors());
