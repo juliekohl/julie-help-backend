@@ -38,7 +38,7 @@ describe("coworkers", () => {
     })
 
     it("should delete a coworkers by its id", async () => {
-        const response = await request(app).delete("/coworkers/6")
-        expect(response.headers['content-type']).toEqual(expect.stringContaining("json"))
+        const response = await request(app).delete("/coworkers/9")
+        expect(response.body.message).toBe("Success");
     })
 })
