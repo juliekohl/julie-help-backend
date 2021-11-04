@@ -2,35 +2,30 @@ import request from 'supertest';
 import app from 'app';
 
 describe("coworkers", () => {
-    it('sanity test', () => {
-        expect(true).toBe(true);
-    })
-
     it("should respond with a 200 status code", async () => {
         const response = await request(app).get("/coworkers");
         expect(response.statusCode).toBe(200);
     })
 
-    it("should get a coworkers by its email and name", async () => {
+    it("should get a coworker by its email and name", async () => {
         const response = await request(app).get("/coworkers/1");
-        expect(response.body).toStrictEqual({
-            email: "Sedrick.Johnston@gmail.com",
-            name: "Kristine Moore"
-        });
+        expect(response.body).toHaveProperty("email");
+        expect(response.body).toHaveProperty("name");
+        expect(response.body).not.toHaveProperty("message");
     })
 
-    it("should post create a coworkers by its name, email and pass", async () => {
+    it("should create a coworker by its name, email and password", async () => {
         const response = await request(app).post("/coworkers").send({
-            coworking_id: 6,
-            name: "Name8",
-            email: "email-test8@email.com",
+            coworking_id: 5,
+            name: "Name5",
+            email: "email-test5@email.com",
             password: "secret"
         });
         expect(response.body.message).toBe("Success");
     })
 
-    it("should post update a coworkers by its name or pass", async () => {
-        const response = await request(app).post("/coworkers/2").send({
+    it("should update a coworker by its name or password", async () => {
+        const response = await request(app).post("/coworkers/5").send({
             name: "Name",
             password: "secret"
         });
@@ -38,7 +33,7 @@ describe("coworkers", () => {
     })
 
     it("should delete a coworkers by its id", async () => {
-        const response = await request(app).delete("/coworkers/9")
+        const response = await request(app).delete("/coworkers/5")
         expect(response.body.message).toBe("Success");
     })
 })
