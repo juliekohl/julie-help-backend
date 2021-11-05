@@ -6,7 +6,7 @@ describe("coworkings", () => {
         expect(true).toBe(true);
     })
 
-    it("should respond with a 200 status code", async () => {
+    it("should get all coworkings", async () => {
         const response = await request(app).get("/coworkings");
         expect(response.statusCode).toBe(200);
     })
@@ -16,10 +16,23 @@ describe("coworkings", () => {
         expect(response.body.id).toBe(1);
     })
 
-    it("should post create a coworking by its id and name", async () => {
+    it("should create a coworking by its name", async () => {
         const response = await request(app).post("/coworking").send({
             name: "Name"
         });
         expect(typeof response.body).toBe("number");
+    })
+
+    it("should update a coworking by its name", async () => {
+        const response = await request(app).post("/coworking/1").send({
+            name: "New Name"
+        });
+        console.log(response.body)
+        // expect(response.body).toBe("number");
+    })
+
+    it("should delete a coworking by its id", async () => {
+        const response = await request(app).delete("/coworking/1")
+        expect(response.body.message).toBe("Success");
     })
 })
