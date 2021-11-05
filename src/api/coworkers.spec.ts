@@ -2,7 +2,7 @@ import request from 'supertest';
 import app from 'app';
 
 describe("coworkers", () => {
-    it("should respond with a 200 status code", async () => {
+    it("should get all coworkers", async () => {
         const response = await request(app).get("/coworkers");
         expect(response.statusCode).toBe(200);
     })

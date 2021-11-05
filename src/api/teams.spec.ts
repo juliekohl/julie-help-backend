@@ -2,7 +2,7 @@ import request from 'supertest';
 import app from 'app';
 
 describe("teams", () => {
-    it("should respond with a 200 status code", async () => {
+    it("should get all teams", async () => {
         const response = await request(app).get("/teams");
         expect(response.statusCode).toBe(200);
     })
