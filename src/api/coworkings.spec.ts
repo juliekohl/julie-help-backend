@@ -16,14 +16,14 @@ describe("coworkings", () => {
         expect(response.body.id).toBe(1);
     })
 
-    it("should post create a coworking by its name", async () => {
+    it("should create a coworking by its name", async () => {
         const response = await request(app).post("/coworking").send({
             name: "Name"
         });
         expect(typeof response.body).toBe("number");
     })
 
-    it("should post update a coworking by its name", async () => {
+    it("should update a coworking by its name", async () => {
         const response = await request(app).post("/coworking/1").send({
             name: "Name"
         });
