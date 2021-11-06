@@ -21,7 +21,7 @@ app.use(bodyParser.json());
  */
 
 import apiCoworkings from './api/coworkings'
-import apiTeams from './api/teams';
+import apiTeams from './api/teams/teams';
 import apiCoworkers from './api/coworkers';
 
 apiCoworkings(app, database);
