@@ -1,3 +1,17 @@
+APP_PORT="3000"
+DB_HOST="127.0.0.1"
+DB_PORT="3306"
+DB_USER="root"
+DB_PASSWORD="root"
+DB_NAME="julie-help"
+
+SET_APP_PORT = 'APP_PORT=${APP_PORT}'
+SET_DB_HOST = 'DB_HOST=${DB_HOST}'
+SET_DB_PORT = 'DB_PORT=${DB_PORT}'
+SET_DB_USER = 'DB_USER=${DB_USER}'
+SET_DB_PASSWORD = 'DB_PASSWORD=${DB_PASSWORD}'
+SET_DB_NAME = 'DB_NAME=${DB_NAME}'
+
 #--------------------------------------------------------------------------
 # Installation
 #--------------------------------------------------------------------------
@@ -32,12 +46,28 @@ build-db:
 	@make seed
 
 #
+# Create .env
+#
+
+.PHONY: create-dotenv
+create-dotenv:
+	@echo "+ $@"
+	@ > .env; \
+		( echo $(SET_APP_PORT); \
+		  echo $(SET_DB_HOST); \
+		  echo $(SET_DB_PORT); \
+		  echo $(SET_DB_USER); \
+		  echo $(SET_DB_PASSWORD); \
+		  echo $(SET_DB_NAME); \
+		) >> .env
+
+#
 # Run Express server
 #
 .PHONY: run-server
 run-server:
 	@echo "+ $@"
-	@npx ts-node src/server.ts
+	@APP_PORT=${APP_PORT} DB_HOST=${DB_HOST} DB_PORT=${DB_PORT} DB_USER=${DB_USER} DB_PASSWORD=${DB_PASSWORD} DB_NAME=${DB_NAME} npx ts-node src/server.ts
 
 #--------------------------------------------------------------------------
 # Migrations
@@ -63,7 +93,7 @@ create-migration-file:
 .PHONY: migrate
 migrate:
 	@echo "+ $@"
-	@knex migrate:latest --knexfile src/database/knexfile.ts
+	@knex migrate:latest --knexfile knexfile.ts
 
 #
 # Rollback
@@ -72,7 +102,7 @@ migrate:
 .PHONY: rollback
 rollback:
 	@echo "+ $@"
-	@knex migrate:rollback --knexfile src/database/knexfile.ts
+	@knex migrate:rollback --knexfile knexfile.ts
 
 #--------------------------------------------------------------------------
 # Seeding
@@ -87,7 +117,7 @@ rollback:
 .PHONY: create-seed-file
 create-seed-file:
 	@echo "+ $@"
-	@knex seed:make $(name) -x ts --knexfile src/database/knexfile.ts
+	@knex seed:make $(name) -x ts --knexfile knexfile.ts
 
 #
 # Seed
@@ -96,4 +126,4 @@ create-seed-file:
 .PHONY: seed
 seed:
 	@echo "+ $@"
-	@knex seed:run --knexfile src/database/knexfile.ts
+	@knex seed:run --knexfile knexfile.ts

@@ -1,7 +1,7 @@
 import { Knex } from "knex";
 import faker from 'faker';
 import crypto from 'crypto';
-import {knexTruncate} from "../../shared/knex-truncate";
+import {knexTruncate} from "../../api/shared/knex-truncate";
 
 export async function seed(knex: Knex): Promise<void> {
     const rows = [];
