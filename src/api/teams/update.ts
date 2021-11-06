@@ -1,6 +1,6 @@
-import teams from "./teams";
+import crypto from 'crypto';
 
-const update = (teams, app, database, crypto) => {
+const update = (app, database) => {
     /**
      * Update
      * POST /team/:id { coworking_id, user_id }

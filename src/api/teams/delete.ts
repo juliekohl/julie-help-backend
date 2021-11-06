@@ -1,6 +1,6 @@
 import teams from "./teams";
 
-const del = (teams, app, database) => {
+const del = (app, database) => {
     /**
      * Delete
      * DELETE /team/:id

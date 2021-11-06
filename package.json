@@ -29,19 +29,5 @@
     "supertest": "^6.1.6",
     "ts-node": "^10.4.0",
     "typescript": "^4.4.4"
-  },
-  "jest": {
-    "preset": "ts-jest",
-    "testEnvironment": "node",
-    "transform": {
-      "node_modules/variables/.+\\.(j|t)sx?$": "ts-jest"
-    },
-    "transformIgnorePatterns": [
-      "node_modules/(?!variables/.*)"
-    ],
-    "moduleDirectories": [
-      "node_modules",
-      "src"
-    ]
   }
 }

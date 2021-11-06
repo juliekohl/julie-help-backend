@@ -1,6 +1,6 @@
-import teams from "./teams";
+import crypto from 'crypto';
 
-const create = (teams, app, database, crypto) => {
+const create = (app, database) => {
     /**
      * Create
      * POST /team { coworking_id, user_id }
@@ -22,14 +22,19 @@ const create = (teams, app, database, crypto) => {
             const userId = await createUser;
 
             // Create team
-            await database
+            const createTeam = await database
                 .insert({
                     coworking_id: req.body.coworking_id,
                     user_id: userId,
                 })
                 .into("teams");
 
-            res.json({ message: 'Success' });
+            const teamId = await createTeam[0];
+
+            res.json({
+                message: 'Success',
+                id: teamId
+            });
         } catch(err) {
             res.json({ message: err.sqlMessage });
         }

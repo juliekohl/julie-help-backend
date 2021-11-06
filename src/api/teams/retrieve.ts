@@ -1,5 +1,5 @@
 
-const retrieve = (teams, app, database) => {
+const retrieve = (app, database) => {
     /**
      * Retrieve single
      * GET /team/:id

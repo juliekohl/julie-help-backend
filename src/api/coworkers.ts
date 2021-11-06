@@ -1,4 +1,6 @@
-const coworkers = (app, database, crypto) => {
+import crypto from 'crypto';
+
+const coworkers = (app, database) => {
     /**
      * Retrieve all
      * GET /coworkers

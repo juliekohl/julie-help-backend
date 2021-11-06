@@ -1,6 +1,4 @@
-import teams from "./teams";
-
-const retrieveAll = (teams, app, database) => {
+const retrieveAll = (app, database) => {
     /**
      * Retrieve all
      * GET /teams
@@ -31,4 +29,5 @@ const retrieveAll = (teams, app, database) => {
         }
     });
 }
+
 export default retrieveAll
