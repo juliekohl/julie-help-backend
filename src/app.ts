@@ -19,9 +19,9 @@ app.use(bodyParser.json());
  * Load API endpoints
  */
 
-import apiCoworkings from './api/coworkings'
+import apiCoworkings from './api/coworkings/coworkings'
 import apiTeams from './api/teams/teams';
-import apiCoworkers from './api/coworkers';
+import apiCoworkers from './api/coworkers/coworkers';
 
 apiCoworkings(app, database);
 apiTeams(app, database);

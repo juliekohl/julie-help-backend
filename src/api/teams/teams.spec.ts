@@ -48,6 +48,7 @@ describe("teams", () => {
         const newTeamId = newTeam.body.id;
 
         const response = await request(app).delete(`/teams/${newTeamId}`)
+
         expect(response.body.message).toBe("Success");
     })
 })
