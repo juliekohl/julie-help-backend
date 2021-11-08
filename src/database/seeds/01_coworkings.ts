@@ -3,8 +3,8 @@ import faker from 'faker';
 import {knexTruncate} from "../../api/shared/knex-truncate";
 
 export async function seed(knex: Knex): Promise<void> {
-    const rows = [];
-    const rowsTotal = 10;
+    const rows: any = [];
+    const rowsTotal: number = 10;
 
     await knexTruncate(knex, "coworkings");
 

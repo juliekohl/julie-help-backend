@@ -2,9 +2,9 @@ import { Knex } from "knex";
 import faker from 'faker';
 
 export async function seed(knex: Knex): Promise<void> {
-    const rows = [];
-    const firstUserId = 1;
-    const lastUserId = 100;
+    const rows: any = [];
+    const firstUserId: number = 1;
+    const lastUserId: number = 100;
 
     await knex("teams").truncate();
 

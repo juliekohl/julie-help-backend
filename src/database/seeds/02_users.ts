@@ -4,9 +4,9 @@ import crypto from 'crypto';
 import {knexTruncate} from "../../api/shared/knex-truncate";
 
 export async function seed(knex: Knex): Promise<void> {
-    const rows = [];
-    const rowsTotal = 200;
-    const password = crypto
+    const rows: any = [];
+    const rowsTotal: number = 200;
+    const password: string = crypto
         .createHash('md5')
         .update('secret')
         .digest('hex');
