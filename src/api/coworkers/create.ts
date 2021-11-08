@@ -41,4 +41,5 @@ const create = (app, database) => {
     });
 }
 
-export default create
+export default create;
+

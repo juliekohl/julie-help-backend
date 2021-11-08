@@ -28,4 +28,4 @@ const del = (app, database) => {
         }
     });
 }
-export default del
+export default del;

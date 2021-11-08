@@ -4,7 +4,7 @@ import create from "./create";
 import update from "./update";
 import del from "./delete";
 
-const coworkers = (app, database) => {
+const coworkings = (app, database) => {
     retrieveAll(app, database);
     retrieve(app, database);
     create(app, database);
@@ -12,4 +12,4 @@ const coworkers = (app, database) => {
     del(app, database);
 }
 
-export default coworkers;
+export default coworkings;

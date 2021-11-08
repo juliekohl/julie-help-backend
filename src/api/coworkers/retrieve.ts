@@ -30,4 +30,4 @@ const retrieve = (app, database) => {
     });
 }
 
-export default retrieve
+export default retrieve;

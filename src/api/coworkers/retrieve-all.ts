@@ -30,4 +30,5 @@ const retrieveAll = (app, database) => {
     });
 }
 
-export default retrieveAll
+export default retrieveAll;
+
