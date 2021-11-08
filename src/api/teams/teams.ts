@@ -12,4 +12,4 @@ const teams = (app, database) => {
     del(app, database)
 }
 
-export default teams
+export default teams;

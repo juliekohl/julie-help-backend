@@ -44,4 +44,5 @@ const update = (app, database) => {
     });
 }
 
-export default update
+export default update;
+

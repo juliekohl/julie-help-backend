@@ -20,7 +20,7 @@ describe("coworkers", () => {
     it("should create", async () => {
         const response = await request(app).post("/coworkers").send({
             coworking_id: 1,
-            name: "Name5",
+            name: "Name Test",
             email: faker.internet.email(),
             password: "secret"
         });
@@ -30,7 +30,7 @@ describe("coworkers", () => {
 
     it("should update", async () => {
         const response = await request(app).post("/coworkers/1").send({
-            name: "Name",
+            name: "Name Update",
             password: "secret"
         });
 
@@ -38,16 +38,15 @@ describe("coworkers", () => {
     })
 
     it("should delete", async () => {
-        const newCoworker = await request(app).post("/teams").send({
+        const newCoworker = await request(app).post("/coworkers").send({
             coworking_id: 1,
-            name: "Name",
+            name: "Name Delete",
             email: faker.internet.email(),
             password: "secret"
         });
 
-        const newTeamId = newCoworker.body.id;
-
-        const response = await request(app).delete(`/coworkers/${newTeamId}`)
+        const newCoworkerId = newCoworker.body.id;
+        const response = await request(app).delete(`/coworkers/${newCoworkerId}`)
 
         expect(response.body.message).toBe("Success");
     })
