@@ -1,33 +1,31 @@
-import crypto from 'crypto';
+import crypto from "crypto";
 
 const update = (app, database) => {
     /**
      * Update
-     * POST /team/:id { coworking_id, user_id }
+     * POST /coworkers/:id { coworking_id, user_id }
      */
-    app.post('/teams/:id', async (req, res) => {
+    app.post('/coworkers/:id', async (req, res) => {
         try {
             const id: number = Number(req.params.id);
 
-            // Select Team
-            let team = await database
+            // Select Coworker
+            let coworker = await database
                 .select("user_id")
-                .table("teams")
+                .table("coworkers")
                 .where({id})
 
-            const teamResult = await team;
-            const userId: number = teamResult[0].user_id;
+            const coworkerResult = await coworker;
+            const userId: number = coworkerResult[0].user_id;
 
             // Update User
             const update: { name?: string; password?: string } = {
                 name: req.body.name
             };
-
-            if(req.body.name){
+            if(req.body.name) {
                 update.name
             }
-
-            if (req.body.password) {
+            if(req.body.password) {
                 update.password = crypto
                     .createHash('md5')
                     .update(req.body.password)
@@ -45,4 +43,5 @@ const update = (app, database) => {
         }
     });
 }
+
 export default update

@@ -1,21 +1,20 @@
-
 const retrieve = (app, database) => {
     /**
      * Retrieve single
-     * GET /team/:id
+     * GET /coworkers/:id
      */
-    app.get('/teams/:id', async (req, res) => {
+    app.get('/coworkers/:id', async (req, res) => {
         try {
             const id: number = Number(req.params.id);
 
-            // Select Team
-            let team = await database
+            // Select Coworker
+            let coworker = await database
                 .select("user_id")
-                .table("teams")
+                .table("coworkers")
                 .where({id})
 
-            const teamResult = await team;
-            const userId: number = teamResult[0].user_id;
+            const coworkerResult = await coworker;
+            const userId: number = coworkerResult[0].user_id;
 
             // Retrieve User
             const user = await database
@@ -31,4 +30,4 @@ const retrieve = (app, database) => {
     });
 }
 
-export default retrieve;
+export default retrieve

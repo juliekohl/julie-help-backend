@@ -1,11 +1,11 @@
-import crypto from 'crypto';
+import crypto from "crypto";
 
 const create = (app, database) => {
     /**
      * Create
-     * POST /team { coworking_id, user_id }
+     * POST /coworkers { coworking_id, user_id }
      */
-    app.post('/teams', async (req, res) => {
+    app.post('/coworkers', async (req, res) => {
         try {
             let password: string = req.body.password;
             let hash: string = crypto.createHash('md5').update(password).digest('hex');
@@ -21,19 +21,19 @@ const create = (app, database) => {
 
             const userId = await createUser;
 
-            // Create team
-            const createTeam = await database
+            // Create Coworker
+            const createCoworker = await database
                 .insert({
                     coworking_id: req.body.coworking_id,
                     user_id: userId,
                 })
-                .into("teams");
+                .into("coworkers");
 
-            const teamId = await createTeam[0];
+            const coworkerId = await createCoworker[0];
 
             res.json({
                 message: 'Success',
-                id: teamId
+                id: coworkerId
             });
         } catch(err) {
             res.json({ message: err.sqlMessage });

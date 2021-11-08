@@ -4,12 +4,12 @@ import create from "./create";
 import update from "./update";
 import del from "./delete";
 
-const teams = (app, database, crypto) => {
-    retrieveAll(teams, app, database)
-    retrieve( teams, app, database)
-    create(teams, app, database, crypto)
-    update(teams, app, database, crypto)
-    del(teams, app, database)
+const teams = (app, database) => {
+    retrieveAll(app, database)
+    retrieve(app, database)
+    create(app, database)
+    update(app, database)
+    del(app, database)
 }
 
 export default teams

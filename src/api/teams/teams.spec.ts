@@ -1,39 +1,54 @@
 import request from 'supertest';
+import faker from 'faker';
 import app from 'app';
 
 describe("teams", () => {
-    it("should get all teams", async () => {
+    it("should retrieve all", async () => {
         const response = await request(app).get("/teams");
+
         expect(response.statusCode).toBe(200);
     })
 
-    it("should get a team by its email and name", async () => {
+    it("should retrieve a single", async () => {
         const response = await request(app).get("/teams/1");
+
         expect(response.body).toHaveProperty("email");
         expect(response.body).toHaveProperty("name");
         expect(response.body).not.toHaveProperty("message");
     })
 
-    it("should create a team by its name, email and password", async () => {
+    it("should create", async () => {
         const response = await request(app).post("/teams").send({
-            coworking_id: 6,
-            name: "Name6",
-            email: "email-test6@email.com",
+            coworking_id: 1,
+            name: "Name",
+            email: faker.internet.email(),
             password: "secret"
         });
+
         expect(response.body.message).toBe("Success");
     })
 
-    it("should update a team by its name or password", async () => {
-        const response = await request(app).post("/teams/6").send({
+    it("should update", async () => {
+        const response = await request(app).post("/teams/1").send({
             name: "Name",
             password: "secret"
         });
+
         expect(response.body.message).toBe("Success");
     })
 
-    it("should delete a teams by its id", async () => {
-        const response = await request(app).delete("/teams/6")
+    it("should delete", async () => {
+        const newTeam = await request(app).post("/teams").send({
+            coworking_id: 1,
+            name: "Name",
+            email: faker.internet.email(),
+            password: "secret"
+        });
+
+        const newTeamId = newTeam.body.id;
+
+        const response = await request(app).delete(`/teams/${newTeamId}`)
+
         expect(response.body.message).toBe("Success");
     })
 })

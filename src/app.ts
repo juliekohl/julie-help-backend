@@ -6,7 +6,6 @@ import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
 const database = require("./database");
-import libCrypto from 'crypto';
 
 require("dotenv").config()
 
@@ -20,12 +19,12 @@ app.use(bodyParser.json());
  * Load API endpoints
  */
 
-import apiCoworkings from './api/coworkings'
+import apiCoworkings from './api/coworkings/coworkings'
 import apiTeams from './api/teams/teams';
-import apiCoworkers from './api/coworkers';
+import apiCoworkers from './api/coworkers/coworkers';
 
 apiCoworkings(app, database);
-apiTeams(app, database, libCrypto);
-apiCoworkers(app, database, libCrypto);
+apiTeams(app, database);
+apiCoworkers(app, database);
 
 export default app
