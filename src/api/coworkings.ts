@@ -3,71 +3,74 @@ const coworkings = (app, database) => {
      * Retrieve all
      * GET /coworkings
      */
-    app.get('/coworkings', (req, res) => {
-        database
-            .select("*")
-            .into("coworkings")
-            .then(result => {
-                res.json(result);
-            }).catch(err => {
-            res.json(err);
-        });
+    app.get('/coworkings', async (req, res) => {
+        try {
+            const coworking = await database
+                .select("*")
+                .table("coworkings")
+
+            res.json(coworking);
+        } catch (err) {
+            res.json({ message: err.sqlMessage });
+        }
     });
 
     /**
      * Retrieve single
      * GET /coworking/:id
      */
-    app.get('/coworking/:id', (req, res) => {
-        const id: number = Number(req.params.id);
+    app.get('/coworking/:id', async (req, res) => {
+        try {
+            const id: number = Number(req.params.id);
 
-        database
-            .select("*")
-            .table("coworkings")
-            .where('id', id)
-            .orderBy("name", "asc")
-            .then(result => {
-                res.json(result[0]);
-            })
-            .catch(err => {
-                res.json(err);
-            });
+            let coworking = await database
+                .select("*")
+                .table("coworkings")
+                .where({id})
+                .orderBy("name", "asc")
+
+            res.json(coworking[0]);
+        } catch (err) {
+            res.json({ message: err.sqlMessage });
+        }
     });
 
     /**
      * Create
      * POST /coworking { id, name }
      */
-    app.post('/coworking', (req, res) => {
-        const coworking: object = req.body;
+    app.post('/coworking', async (req, res) => {
+        try {
+            const coworking: object = req.body;
 
-        database
-            .insert(coworking)
-            .into("coworkings")
-            .then(result => {
-                res.json(result[0]);
-            }).catch(err => {
-            res.json(err);
-        });
+            await database
+                .insert(coworking)
+                .into("coworkings")
+
+            res.json({message: 'Success'});
+        } catch (err) {
+            res.json({ message: err.sqlMessage });
+        }
     });
 
     /**
      * Update
      * POST /coworking/:id { name }
      */
-    app.post('/coworking/:id', (req, res) => {
-        const id: number = Number(req.params.id);
-        const newData: object = req.body;
+    app.post('/coworking/:id', async (req, res) => {
+        try {
+            const id: number = Number(req.params.id);
+            const newData: object = req.body;
 
-        database
-            .update(newData)
-            .table("coworkings")
-            .where({id})
-            .then(result => {
-                res.json(result);
-            }).catch(err => {
-            res.json(err);
-        });
+            await database
+                .update(newData)
+                .table("coworkings")
+                .where({id})
+
+            res.json({message: 'Success'});
+        } catch (err) {
+            res.json({ message: err.sqlMessage });
+        }
     });
 
     /**
