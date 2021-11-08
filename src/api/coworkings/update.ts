@@ -1,4 +1,4 @@
-const update = (app, db) => {
+export const update = (app, db) => {
     /**
      * Update
      * POST /coworking/:id { name }
@@ -19,5 +19,3 @@ const update = (app, db) => {
         }
     });
 }
-
-export default update;

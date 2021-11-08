@@ -1,6 +1,4 @@
-import teams from "./teams";
-
-const del = (app, db) => {
+export const del = (app, db) => {
     /**
      * Delete
      * DELETE /team/:id
@@ -28,4 +26,3 @@ const del = (app, db) => {
         }
     });
 }
-export default del;

@@ -19,12 +19,12 @@ app.use(bodyParser.json());
  * Load API endpoints
  */
 
-import apiCoworkings from './api/coworkings/coworkings'
-import apiTeams from './api/teams/teams';
-import apiCoworkers from './api/coworkers/coworkers';
+import { coworkings } from './api/coworkings/coworkings'
+import { teams } from './api/teams/teams';
+import { coworkers } from './api/coworkers/coworkers';
 
-apiCoworkings(app, db);
-apiTeams(app, db);
-apiCoworkers(app, db);
+coworkings(app, db);
+teams(app, db);
+coworkers(app, db);
 
 export default app

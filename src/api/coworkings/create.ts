@@ -1,4 +1,4 @@
-const create = (app, db) => {
+export const create = (app, db) => {
     /**
      * Create
      * POST /coworking { id, name }
@@ -20,4 +20,3 @@ const create = (app, db) => {
         }
     });
 }
-export default create;
