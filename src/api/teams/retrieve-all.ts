@@ -1,4 +1,4 @@
-const retrieveAll = (app, db) => {
+export const retrieveAll = (app, db) => {
     /**
      * Retrieve all
      * GET /teams
@@ -29,6 +29,3 @@ const retrieveAll = (app, db) => {
         }
     });
 }
-
-export default retrieveAll;
-

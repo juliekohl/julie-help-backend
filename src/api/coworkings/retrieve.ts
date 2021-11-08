@@ -1,4 +1,4 @@
-const retrieve = (app, db) => {
+export const retrieve = (app, db) => {
     /**
      * Retrieve single
      * GET /coworking/:id
@@ -19,4 +19,3 @@ const retrieve = (app, db) => {
         }
     });
 }
-export default retrieve;

@@ -1,6 +1,6 @@
 import crypto from 'crypto';
 
-const update = (app, db) => {
+export const update = (app, db) => {
     /**
      * Update
      * POST /team/:id { coworking_id, user_id }
@@ -45,4 +45,3 @@ const update = (app, db) => {
         }
     });
 }
-export default update;

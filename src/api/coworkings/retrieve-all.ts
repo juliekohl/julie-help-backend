@@ -1,4 +1,4 @@
-const retrieveAll = (app, db) => {
+export const retrieveAll = (app, db) => {
     /**
      * Retrieve all
      * GET /coworkings
@@ -16,4 +16,3 @@ const retrieveAll = (app, db) => {
     });
 
 }
-export default retrieveAll;

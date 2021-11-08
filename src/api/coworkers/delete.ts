@@ -1,4 +1,4 @@
-const del = (app, db) => {
+export const del = (app, db) => {
     /**
      * Delete
      * DELETE /coworkers/:id
@@ -26,6 +26,3 @@ const del = (app, db) => {
         }
     });
 }
-
-export default del;
-

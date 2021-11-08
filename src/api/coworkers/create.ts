@@ -1,6 +1,6 @@
 import crypto from "crypto";
 
-const create = (app, db) => {
+export const create = (app, db) => {
     /**
      * Create
      * POST /coworkers { coworking_id, user_id }
@@ -40,6 +40,4 @@ const create = (app, db) => {
         }
     });
 }
-
-export default create;
 
