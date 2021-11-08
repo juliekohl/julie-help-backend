@@ -1,4 +1,4 @@
-const del = (app, database) => {
+const del = (app, db) => {
     /**
      * Delete
      * DELETE /coworkers/:id
@@ -8,7 +8,7 @@ const del = (app, database) => {
             const id: number = Number(req.params.id);
 
             // Select Coworker
-            let coworker = await database
+            let coworker = await db
                 .select("user_id")
                 .table("coworkers")
                 .where({id})
@@ -17,8 +17,8 @@ const del = (app, database) => {
             const userId: number = coworkerResult[0].user_id;
 
             // Delete User
-            await database.delete().table("coworkers").where({id})
-            await database.delete().table("users").where({id: userId})
+            await db.delete().table("coworkers").where({id})
+            await db.delete().table("users").where({id: userId})
 
             res.json({ message: 'Success' });
         } catch (err) {

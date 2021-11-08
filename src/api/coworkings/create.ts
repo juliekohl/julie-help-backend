@@ -1,4 +1,4 @@
-const create = (app, database) => {
+const create = (app, db) => {
     /**
      * Create
      * POST /coworking { id, name }
@@ -7,7 +7,7 @@ const create = (app, database) => {
         try {
             const coworking: object = req.body;
 
-            const createCoworking = await database
+            const createCoworking = await db
                 .insert(coworking)
                 .into("coworkings")
 
