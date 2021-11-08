@@ -7,11 +7,14 @@ const create = (app, database) => {
         try {
             const coworking: object = req.body;
 
-            await database
+            const createCoworking = await database
                 .insert(coworking)
                 .into("coworkings")
 
-            res.json({ message: 'Success' });
+            res.json({
+                message: 'Success',
+                id: createCoworking[0]
+            });
         } catch (err) {
             res.json({ message: err.sqlMessage });
         }

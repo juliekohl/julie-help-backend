@@ -21,7 +21,7 @@ describe("coworkers", () => {
         const response = await request(app).post("/coworkers").send({
             coworking_id: 1,
             name: "Name Test",
-            email: faker.internet.email(),
+            email: 'coworker_' + faker.internet.email(),
             password: "secret"
         });
 

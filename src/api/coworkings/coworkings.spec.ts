@@ -32,7 +32,12 @@ describe("coworkings", () => {
     })
 
     it("should delete a coworking by its id", async () => {
-        const response = await request(app).delete("/coworking/1")
+        const newCoworking = await request(app).post("/coworking").send({
+            name: "Name Delete",
+        });
+
+        const newCoworkingId = newCoworking.body.id;
+        const response = await request(app).delete(`/coworking/${newCoworkingId}`);
 
         expect(response.body.message).toBe("Success");
     })
