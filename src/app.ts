@@ -5,7 +5,7 @@
 import express from 'express';
 import bodyParser from 'body-parser';
 import cors from 'cors';
-const database = require("./database");
+const db = require("./database");
 
 require("dotenv").config()
 
@@ -23,8 +23,8 @@ import apiCoworkings from './api/coworkings/coworkings'
 import apiTeams from './api/teams/teams';
 import apiCoworkers from './api/coworkers/coworkers';
 
-apiCoworkings(app, database);
-apiTeams(app, database);
-apiCoworkers(app, database);
+apiCoworkings(app, db);
+apiTeams(app, db);
+apiCoworkers(app, db);
 
 export default app

@@ -1,6 +1,6 @@
 import crypto from 'crypto';
 
-const update = (app, database) => {
+const update = (app, db) => {
     /**
      * Update
      * POST /team/:id { coworking_id, user_id }
@@ -10,7 +10,7 @@ const update = (app, database) => {
             const id: number = Number(req.params.id);
 
             // Select Team
-            let team = await database
+            let team = await db
                 .select("user_id")
                 .table("teams")
                 .where({id})
@@ -34,7 +34,7 @@ const update = (app, database) => {
                     .digest('hex');
             }
 
-            await database
+            await db
                 .update(update)
                 .table("users")
                 .where({id: userId})

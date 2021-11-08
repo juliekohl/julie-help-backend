@@ -1,4 +1,4 @@
-const retrieve = (app, database) => {
+const retrieve = (app, db) => {
     /**
      * Retrieve single
      * GET /coworkers/:id
@@ -8,7 +8,7 @@ const retrieve = (app, database) => {
             const id: number = Number(req.params.id);
 
             // Select Coworker
-            let coworker = await database
+            let coworker = await db
                 .select("user_id")
                 .table("coworkers")
                 .where({id})
@@ -17,7 +17,7 @@ const retrieve = (app, database) => {
             const userId: number = coworkerResult[0].user_id;
 
             // Retrieve User
-            const user = await database
+            const user = await db
                 .select("name", "email")
                 .table("users")
                 .where({id: userId})

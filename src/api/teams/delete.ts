@@ -1,6 +1,6 @@
 import teams from "./teams";
 
-const del = (app, database) => {
+const del = (app, db) => {
     /**
      * Delete
      * DELETE /team/:id
@@ -10,7 +10,7 @@ const del = (app, database) => {
             const id: number = Number(req.params.id);
 
             // Select Team
-            let team = await database
+            let team = await db
                 .select("user_id")
                 .table("teams")
                 .where({id})
@@ -19,8 +19,8 @@ const del = (app, database) => {
             const userId: number = teamResult[0].user_id;
 
             // Delete
-            await database.delete().table("teams").where({id})
-            await database.delete().table("users").where({id: userId})
+            await db.delete().table("teams").where({id})
+            await db.delete().table("users").where({id: userId})
 
             res.json({ message: 'Success' });
         } catch (err) {

@@ -4,12 +4,12 @@ import create from "./create";
 import update from "./update";
 import del from "./delete";
 
-const coworkings = (app, database) => {
-    retrieveAll(app, database);
-    retrieve(app, database);
-    create(app, database);
-    update(app, database);
-    del(app, database);
+const coworkings = (app, db) => {
+    retrieveAll(app, db);
+    retrieve(app, db);
+    create(app, db);
+    update(app, db);
+    del(app, db);
 }
 
 export default coworkings;

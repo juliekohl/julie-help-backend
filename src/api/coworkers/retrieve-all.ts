@@ -1,4 +1,4 @@
-const retrieveAll = (app, database) => {
+const retrieveAll = (app, db) => {
     /**
      * Retrieve all
      * GET /coworkers
@@ -8,7 +8,7 @@ const retrieveAll = (app, database) => {
             const coworkerId: number = Number(req.query.coworker_id);
 
             // Select Coworker
-            let coworker = await database
+            let coworker = await db
                 .select("coworking_id")
                 .table("coworkers")
                 .where({id: coworkerId});
@@ -17,7 +17,7 @@ const retrieveAll = (app, database) => {
             const coworkingId: number = coworkerResult[0].coworking_id;
 
             // Retrieve Coworker of coworking_id
-            const coworkers = await database
+            const coworkers = await db
                 .select("coworkers.id", "name", "email")
                 .table("coworkers")
                 .where({coworking_id: coworkingId})

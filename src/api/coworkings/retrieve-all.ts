@@ -1,11 +1,11 @@
-const retrieveAll = (app, database) => {
+const retrieveAll = (app, db) => {
     /**
      * Retrieve all
      * GET /coworkings
      */
     app.get('/coworkings', async (req, res) => {
         try {
-            const coworking = await database
+            const coworking = await db
                 .select("*")
                 .table("coworkings")
 

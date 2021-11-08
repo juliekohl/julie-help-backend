@@ -1,4 +1,4 @@
-const update = (app, database) => {
+const update = (app, db) => {
     /**
      * Update
      * POST /coworking/:id { name }
@@ -8,7 +8,7 @@ const update = (app, database) => {
             const id: number = Number(req.params.id);
             const newData: object = req.body;
 
-            await database
+            await db
                 .update(newData)
                 .table("coworkings")
                 .where({id})

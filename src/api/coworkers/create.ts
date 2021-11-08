@@ -1,6 +1,6 @@
 import crypto from "crypto";
 
-const create = (app, database) => {
+const create = (app, db) => {
     /**
      * Create
      * POST /coworkers { coworking_id, user_id }
@@ -11,7 +11,7 @@ const create = (app, database) => {
             let hash: string = crypto.createHash('md5').update(password).digest('hex');
 
             // Create User
-            let createUser = await database
+            let createUser = await db
                 .insert({
                     name: req.body.name,
                     email: req.body.email,
@@ -22,7 +22,7 @@ const create = (app, database) => {
             const userId = await createUser;
 
             // Create Coworker
-            const createCoworker = await database
+            const createCoworker = await db
                 .insert({
                     coworking_id: req.body.coworking_id,
                     user_id: userId,
