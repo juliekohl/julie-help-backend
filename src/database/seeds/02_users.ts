@@ -1,12 +1,13 @@
 import { Knex } from "knex";
 import faker from 'faker';
 import crypto from 'crypto';
-import {knexTruncate} from "../../api/shared/knex-truncate";
+import { knexTruncate } from "../../api/shared/knex-truncate";
+import { User } from "../../types/user.interface";
 
 export async function seed(knex: Knex): Promise<void> {
-    const rows = [];
-    const rowsTotal = 200;
-    const password = crypto
+    const rows: User[] = [];
+    const rowsTotal: number = 200;
+    const password: string = crypto
         .createHash('md5')
         .update('secret')
         .digest('hex');

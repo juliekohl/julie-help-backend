@@ -1,5 +1,5 @@
 import app from './app'
-const port = process.env.APP_PORT;
+const port: string = process.env.APP_PORT;
 
 /**
  * Start Server
