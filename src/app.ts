@@ -7,7 +7,7 @@ import bodyParser from 'body-parser';
 import cors from 'cors';
 const db = require("./database");
 
-require("dotenv").config()
+require("dotenv").config();
 
 const app = express();
 
@@ -27,4 +27,4 @@ coworkings(app, db);
 teams(app, db);
 coworkers(app, db);
 
-export default app
+export default app;

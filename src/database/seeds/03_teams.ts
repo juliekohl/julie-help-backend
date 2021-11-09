@@ -1,8 +1,9 @@
 import { Knex } from "knex";
 import faker from 'faker';
+import { Team } from "../../types/team.interface";
 
 export async function seed(knex: Knex): Promise<void> {
-    const rows: any = [];
+    const rows: Team[] = [];
     const firstUserId: number = 1;
     const lastUserId: number = 100;
 
