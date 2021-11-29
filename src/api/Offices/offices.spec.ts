@@ -1,4 +1,5 @@
 import request from 'supertest';
+import faker from 'faker';
 import app from 'app';
 
 describe("Offices", () => {
@@ -11,9 +12,20 @@ describe("Offices", () => {
     it('should retrieve a single', async () => {
         const response = await request(app).get("/offices/1");
 
-        console.log("response.body", response.body);
-        // expect(response.body).toHaveProperty("name");
-        // expect(response.body).toHaveProperty("type");
-        // expect(response.body).not.toHaveProperty("message");
+        // console.log("response.body", response.body);
+        expect(response.body).toHaveProperty("name");
+        expect(response.body).toHaveProperty("type");
+        expect(response.body).not.toHaveProperty("message");
+    })
+
+    it("should create", async () => {
+        const response = await request(app).post("/offices").send({
+            coworking_id: 1,
+            name: "Name Test",
+            type: faker.database.type()
+        });
+
+        // console.log("response", response);
+        expect(response.body.message).toBe("Success");
     })
 });
