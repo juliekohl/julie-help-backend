@@ -22,9 +22,11 @@ app.use(bodyParser.json());
 import { coworkings } from './api/coworkings/coworkings'
 import { teams } from './api/teams/teams';
 import { coworkers } from './api/coworkers/coworkers';
+import {offices} from "./api/Offices/offices";
 
 coworkings(app, db);
 teams(app, db);
 coworkers(app, db);
+offices(app, db);
 
 export default app;
