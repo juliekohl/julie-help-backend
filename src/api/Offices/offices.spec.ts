@@ -25,7 +25,15 @@ describe("Offices", () => {
             type: faker.database.type()
         });
 
-        // console.log("response", response);
+        expect(response.body.message).toBe("Success");
+    })
+
+    it("should update", async () => {
+        const response = await request(app).post("/offices/1").send({
+            name: "Name Update",
+            type: "Update Type"
+        });
+
         expect(response.body.message).toBe("Success");
     })
 });

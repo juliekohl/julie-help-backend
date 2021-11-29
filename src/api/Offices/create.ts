@@ -15,7 +15,7 @@ export const create = (app, db) => {
                 id: createOffice[0]
             });
         } catch (err) {
-            res.json({ message: err.sqlMessage });
+            res.json({  message: err.sqlMessage })
         }
     });
 }
