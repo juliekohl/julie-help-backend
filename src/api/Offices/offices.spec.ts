@@ -36,4 +36,17 @@ describe("Offices", () => {
 
         expect(response.body.message).toBe("Success");
     })
+
+    it("should delete", async () => {
+        const newOffice = await request(app).post("/offices").send({
+            coworking_id: 1,
+            name: "Name Test",
+            type: faker.database.type()
+        });
+
+        const newOfficeId = newOffice.body.id;
+        const response = await request(app).delete(`/offices/${newOfficeId}`);
+
+        expect(response.body.message).toBe("Success");
+    })
 });
