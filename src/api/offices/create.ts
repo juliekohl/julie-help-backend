@@ -10,6 +10,7 @@ export const create = (app, db) => {
             const createOffice = await db
                 .insert(office)
                 .into("offices")
+
             res.json({
                 message: 'Success',
                 id: createOffice[0]
