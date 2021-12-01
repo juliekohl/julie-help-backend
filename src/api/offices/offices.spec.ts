@@ -12,7 +12,6 @@ describe("Offices", () => {
     it('should retrieve a single', async () => {
         const response = await request(app).get("/offices/1");
 
-        // console.log("response.body", response.body);
         expect(response.body).toHaveProperty("name");
         expect(response.body).toHaveProperty("type");
         expect(response.body).not.toHaveProperty("message");
