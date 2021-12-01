@@ -7,7 +7,6 @@ export const del = (app, db) => {
         try {
             const id: number = Number(req.params.id);
 
-            // Delete
             await db.delete().table("offices").where({id})
 
             res.json({ message: 'Success' });
