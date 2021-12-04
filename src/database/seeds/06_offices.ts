@@ -16,8 +16,11 @@ export async function seed(knex: Knex): Promise<void> {
                 min: 1,
                 max: 10
             }),
+            officestype_id: faker.datatype.number({
+                min: 1,
+                max: 4
+            }),
             name: faker.name.findName(),
-            type: faker.database.type(),
         });
     }
 

@@ -3,7 +3,7 @@ import faker from 'faker';
 import { Coworker } from "../../types/coworker.interface";
 
 export async function seed(knex: Knex): Promise<void> {
-    const rows: Coworker[] = [];
+    const rows: Partial<Coworker>[] = [];
     const firstUserId: number = 101;
     const lastUserId: number = 200;
 
