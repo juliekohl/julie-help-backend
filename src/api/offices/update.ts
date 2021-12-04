@@ -6,7 +6,7 @@ export const update = (app, db) => {
     app.post('/offices/:id', async (req, res) => {
        try {
            const id: number = Number(req.params.id);
-           const newData: { name?: string; type?: string } = {
+           const newData: { name?: string; officestype_id?: number } = {
                name: req.body.name
            };
 
@@ -14,8 +14,8 @@ export const update = (app, db) => {
                newData.name
            }
 
-           if (req.body.type){
-               newData.type
+           if (req.body.officestype_id){
+               newData.officestype_id
            }
 
            await db

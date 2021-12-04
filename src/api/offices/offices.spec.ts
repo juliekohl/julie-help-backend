@@ -21,7 +21,7 @@ describe("Offices", () => {
         const response = await request(app).post("/offices").send({
             coworking_id: 1,
             name: "Name Test",
-            type: faker.database.type()
+            officestype_id: 1
         });
 
         expect(response.body.message).toBe("Success");
@@ -30,7 +30,7 @@ describe("Offices", () => {
     it("should update", async () => {
         const response = await request(app).post("/offices/1").send({
             name: "Name Update",
-            type: "Update Type"
+            officestype_id: 1
         });
 
         expect(response.body.message).toBe("Success");
@@ -40,7 +40,7 @@ describe("Offices", () => {
         const newOffice = await request(app).post("/offices").send({
             coworking_id: 1,
             name: "Name Test",
-            type: faker.database.type()
+            officestype_id: 1
         });
 
         const newOfficeId = newOffice.body.id;
