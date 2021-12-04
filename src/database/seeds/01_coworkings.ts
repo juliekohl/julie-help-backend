@@ -4,7 +4,7 @@ import { knexTruncate } from "../../api/shared/knex-truncate";
 import { Coworking } from "../../types/coworking.interface";
 
 export async function seed(knex: Knex): Promise<void> {
-    const rows: Coworking[] = [];
+    const rows: Partial<Coworking>[] = [];
     const rowsTotal: number = 10;
 
     await knexTruncate(knex, "coworkings");
