@@ -5,7 +5,11 @@ export const create = (app, db) => {
      */
     app.post('/offices', async (req, res) => {
         try {
-            const office: object = req.body;
+            const office: {
+                coworking_id: number;
+                officestype_id: number
+                name: string;
+            } = req.body;
 
             const createOffice = await db
                 .insert(office)

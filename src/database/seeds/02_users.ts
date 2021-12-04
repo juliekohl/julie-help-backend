@@ -5,7 +5,7 @@ import { knexTruncate } from "../../api/shared/knex-truncate";
 import { User } from "../../types/user.interface";
 
 export async function seed(knex: Knex): Promise<void> {
-    const rows: User[] = [];
+    const rows: Partial<User>[] = [];
     const rowsTotal: number = 200;
     const password: string = crypto
         .createHash('md5')
