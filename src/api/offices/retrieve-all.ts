@@ -18,7 +18,7 @@ export const retrieveAll = (app, db) => {
 
             // Get offices of coworking_id
             const offices = await db
-                .select("offices.id", "offices.name", "type")
+                .select("offices.id", "offices.name", "officestypes.name AS type")
                 .table("offices")
                 .where({coworking_id: coworkingId})
                 .join("officestypes", "officestype_id", "officestypes.id");
@@ -27,6 +27,5 @@ export const retrieveAll = (app, db) => {
         } catch (err) {
             res.json({ message: err.sqlMessage });
         }
-
     });
 }

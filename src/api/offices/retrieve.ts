@@ -9,7 +9,7 @@ export const retrieve = (app, db) => {
 
             // Retrieve office
             const office = await db
-                .select("offices.name", "type")
+                .select("offices.name", "officestypes.name AS type")
                 .table("offices")
                 .where({"offices.id": id})
                 .join("officestypes", "officestype_id", "officestypes.id");
