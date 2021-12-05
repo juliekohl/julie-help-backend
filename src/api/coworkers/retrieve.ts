@@ -7,23 +7,22 @@ export const retrieve = (app, db) => {
         try {
             const id: number = Number(req.params.id);
 
-            // Select Coworker
-            let coworker = await db
-                .select("user_id")
-                .table("coworkers")
-                .where({id})
+            const response = await db
+                .raw(`
+                    SELECT
+                        users.name, 
+                        users.email,
+                        plans.id AS plan_id, 
+                        plans.name AS plan_name, 
+                        plans.value
+                    FROM coworkers
+                    JOIN users on coworkers.user_id = users.id
+                    JOIN coworkers_plans on coworkers.id = coworkers_plans.coworker_id
+                    JOIN plans on plans.id = coworkers_plans.plan_id
+                    WHERE coworkers.id = ?
+                `, [id]);
 
-            const coworkerResult = await coworker;
-            const userId: number = coworkerResult[0].user_id;
-
-            // Retrieve User
-            const user = await db
-                .select("name", "email")
-                .table("users")
-                .where({id: userId})
-
-            const userResult = await user;
-            res.json(userResult[0]);
+            res.json(response[0]);
         } catch (err) {
             res.json({ message: err.sqlMessage });
         }
