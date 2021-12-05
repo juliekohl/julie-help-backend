@@ -12,6 +12,11 @@ export const del = (app, db) => {
                 .table("plans")
                 .where({id});
 
+            await db
+                .delete()
+                .table("coworkers_plans")
+                .where({plan_id: id});
+
             res.json({ message: 'Success' });
         } catch (err) {
             res.json({ message: err });

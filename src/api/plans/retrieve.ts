@@ -7,15 +7,21 @@ export const retrieve = (app, db) => {
         try {
             const id: number = Number(req.params.id);
 
-            // Retrieve Plan
-            const plan = await db
-                .select("name", "value")
-                .table("plans")
-                .where({id});
+            const response = await db
+                .raw(`
+                    SELECT
+                        plans.name,
+                        plans.value,
+                        coworkers.id,
+                        users.name
+                    FROM plans
+                    JOIN coworkers_plans on plans.id = coworkers_plans.plan_id
+                    JOIN coworkers on coworkers.id = coworkers_plans.coworker_id
+                    JOIN users on users.id = coworkers.user_id
+                    WHERE plans.id = ?
+                `, [id]);
 
-            const planResult = await plan;
-
-            res.json(planResult[0]);
+            res.json(response[0]);
         } catch (err) {
             res.json({ message: err.sqlMessage });
         }

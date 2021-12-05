@@ -19,6 +19,7 @@ export const del = (app, db) => {
             // Delete User
             await db.delete().table("coworkers").where({id})
             await db.delete().table("users").where({id: userId})
+            await db.delete().table("coworkers_plans").where({coworker_id: id})
 
             res.json({ message: 'Success' });
         } catch (err) {

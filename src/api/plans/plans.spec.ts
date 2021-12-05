@@ -17,6 +17,11 @@ describe("Plans", () => {
         expect(response.body).not.toHaveProperty("message");
     })
 
+    it("should retrieve a single with coworkers", async () => {
+        const response = await request(app).get("/plans/5");
+        console.log(response.body);
+    })
+
     it("should create", async () => {
         const response = await request(app).post("/plans").send({
             office_id: 1,
