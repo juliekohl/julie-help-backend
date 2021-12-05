@@ -1,6 +1,7 @@
 import request from 'supertest';
 import faker from 'faker';
 import app from 'app';
+import {log} from "util";
 
 describe("coworkers", () => {
     it("should retrieve all", async () => {
@@ -17,6 +18,11 @@ describe("coworkers", () => {
         expect(response.body).not.toHaveProperty("message");
     })
 
+    it("should retrieve a single with plans", async () => {
+        const response = await request(app).get("/coworkers/1");
+        console.log(response.body);
+    })
+
     it("should create", async () => {
         const response = await request(app).post("/coworkers").send({
             coworking_id: 1,
@@ -31,7 +37,8 @@ describe("coworkers", () => {
     it("should update", async () => {
         const response = await request(app).post("/coworkers/1").send({
             name: "Name Update",
-            password: "secret"
+            password: "secret",
+            plan_id: 2
         });
 
         expect(response.body.message).toBe("Success");
