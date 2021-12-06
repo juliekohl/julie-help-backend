@@ -1,10 +1,10 @@
 import { Knex } from "knex";
-import { Plans } from "../../types/plans.interface";
+import { Plan } from "../../types/plan.interface";
 import faker from 'faker';
 import {knexTruncate} from "../../api/shared/knex-truncate";
 
 export async function seed(knex: Knex): Promise<void> {
-    const rows: Plans[] = [];
+    const rows: Plan[] = [];
     const rowsTotal: number = 50;
 
     await knexTruncate(knex, "plans");
