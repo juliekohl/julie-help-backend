@@ -22,7 +22,7 @@ export const retrieve = (app, db) => {
                     WHERE coworkers.id = ?
                 `, [id]);
 
-            res.json(response[0]);
+            res.json(response[0][0]);
         } catch (err) {
             res.json({ message: err.sqlMessage });
         }
