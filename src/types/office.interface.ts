@@ -1,4 +1,4 @@
-export interface Offices {
+export interface Office {
     id: number;
     coworking_id: number;
     officestype_id: number;
