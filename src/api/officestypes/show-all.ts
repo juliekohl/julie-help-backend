@@ -1,4 +1,4 @@
-export const retrieveAll = (app, db) => {
+export const showAll= (app, db) => {
     /**
      * Retrieve all
      * GET /officestypes

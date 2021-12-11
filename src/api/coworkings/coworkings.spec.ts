@@ -2,13 +2,13 @@ import request from 'supertest';
 import app from 'app';
 
 describe("coworkings", () => {
-    it("should retrieve all", async () => {
+    it("should show all", async () => {
         const response = await request(app).get("/coworkings");
 
         expect(response.statusCode).toBe(200);
     })
 
-    it("should retrieve a single", async () => {
+    it("should show a single", async () => {
         const response = await request(app).get("/coworking/1");
 
         expect(response.body).toHaveProperty("name");

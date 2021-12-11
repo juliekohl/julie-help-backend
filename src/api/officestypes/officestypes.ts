@@ -1,5 +1,5 @@
-import {retrieveAll} from "./retrieve-all";
+import {showAll} from "./show-all";
 
 export const officestypes = (app, db) => {
-    retrieveAll(app, db);
+    showAll(app, db);
 }

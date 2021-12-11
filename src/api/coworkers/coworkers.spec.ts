@@ -4,13 +4,13 @@ import app from 'app';
 import {log} from "util";
 
 describe("coworkers", () => {
-    it("should retrieve all", async () => {
+    it("should show all", async () => {
         const response = await request(app).get("/coworkers");
 
         expect(response.statusCode).toBe(200);
     })
 
-    it("should retrieve a single", async () => {
+    it("should show a single", async () => {
         const response = await request(app).get("/coworkers/1");
 
         expect(response.body).toHaveProperty("email");
@@ -18,7 +18,7 @@ describe("coworkers", () => {
         expect(response.body).not.toHaveProperty("message");
     })
 
-    it("should retrieve a single with plans", async () => {
+    it("should show a single with plans", async () => {
         const response = await request(app).get("/coworkers/1");
         console.log(response.body);
     })
