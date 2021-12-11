@@ -10,12 +10,8 @@ export const update = (app, db) => {
                name: req.body.name
            };
 
-           if (req.body.name){
-               newData.name
-           }
-
            if (req.body.officestype_id){
-               newData.officestype_id
+               newData.officestype_id = req.body.officestype_id;
            }
 
            await db
