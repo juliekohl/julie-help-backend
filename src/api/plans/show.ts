@@ -11,17 +11,12 @@ export const show = (app, db) => {
                 .raw(`
                     SELECT
                         plans.name,
-                        plans.value,
-                        coworkers.id,
-                        users.name
+                        plans.value
                     FROM plans
-                    JOIN coworkers_plans on plans.id = coworkers_plans.plan_id
-                    JOIN coworkers on coworkers.id = coworkers_plans.coworker_id
-                    JOIN users on users.id = coworkers.user_id
                     WHERE plans.id = ?
                 `, [id]);
 
-            res.json(response[0]);
+            res.json(response[0][0]);
         } catch (err) {
             res.json({ message: err.sqlMessage });
         }

@@ -12,8 +12,8 @@ export const show = (app, db) => {
                     SELECT
                         users.name, 
                         users.email,
-                        plans.id AS plan_id, 
-                        plans.name AS plan_name, 
+                        plans.id AS planId, 
+                        plans.name AS planName, 
                         plans.value
                     FROM coworkers
                     JOIN users on coworkers.user_id = users.id
