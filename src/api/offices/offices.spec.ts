@@ -3,13 +3,13 @@ import faker from 'faker';
 import app from 'app';
 
 describe("Offices", () => {
-    it("should retrieve all", async () => {
+    it("should show all", async () => {
         const response = await request(app).get("/offices");
 
         expect(response.statusCode).toBe(200);
     })
 
-    it('should retrieve a single', async () => {
+    it('should show a single', async () => {
         const response = await request(app).get("/offices/1");
 
         expect(response.body).toHaveProperty("name");

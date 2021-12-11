@@ -3,13 +3,13 @@ import app from 'app';
 import faker from 'faker';
 
 describe("Plans", () => {
-    it("should retrieve all", async () => {
+    it("should show all", async () => {
         const response = await request(app).get("/plans");
 
         expect(response.statusCode).toBe(200);
     })
 
-    it("should retrieve single", async () => {
+    it("should show single", async () => {
         const response = await request(app).get("/plans/1");
 
         expect(response.body).toHaveProperty("name");
@@ -17,7 +17,7 @@ describe("Plans", () => {
         expect(response.body).not.toHaveProperty("message");
     })
 
-    it("should retrieve a single with coworkers", async () => {
+    it("should show a single with coworkers", async () => {
         const response = await request(app).get("/plans/5");
         console.log(response.body);
     })

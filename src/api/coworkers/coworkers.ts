@@ -1,12 +1,12 @@
-import { retrieveAll } from "./retrieve-all";
-import { retrieve } from "./retrieve";
+import { showAll} from "./show-all";
+import { show } from "./show";
 import { create } from "./create";
 import { update } from "./update";
 import { del } from "./delete";
 
 export const coworkers = (app, db) => {
-    retrieveAll(app, db);
-    retrieve(app, db);
+    showAll(app, db);
+    show(app, db);
     create(app, db);
     update(app, db);
     del(app, db);

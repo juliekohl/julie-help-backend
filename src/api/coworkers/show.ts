@@ -1,4 +1,4 @@
-export const retrieve = (app, db) => {
+export const show = (app, db) => {
     /**
      * Retrieve single
      * GET /coworkers/:id
