@@ -21,7 +21,8 @@ export const showAll= (app, db) => {
                 .select("offices.id", "offices.name", "officestypes.name AS type")
                 .table("offices")
                 .where({coworking_id: coworkingId})
-                .join("officestypes", "officestype_id", "officestypes.id");
+                .join("officestypes", "officestype_id", "officestypes.id")
+                .orderBy("offices.id", "asc");
 
             res.json(offices);
         } catch (err) {
