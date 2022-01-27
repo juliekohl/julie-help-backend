@@ -7,8 +7,7 @@ export const create = (app, db) => {
      */
     app.post('/coworkers', async (req, res) => {
         try {
-            let password: string = req.body.password;
-            let hash: string = crypto.createHash('md5').update(password).digest('hex');
+            let hash: string = crypto.createHash('md5').update(req.body.password).digest('hex');
 
             // Create User
             let createUser = await db

@@ -25,6 +25,7 @@ import { coworkers } from './api/coworkers/coworkers';
 import { offices } from "./api/offices/offices";
 import { plans } from "./api/plans/plans";
 import { officestypes } from "./api/officestypes/officestypes";
+import { login } from './api/login/login';
 
 coworkings(app, db);
 teams(app, db);
@@ -32,5 +33,6 @@ coworkers(app, db);
 offices(app, db);
 plans(app, db);
 officestypes(app, db);
+login(app, db);
 
 export default app;
