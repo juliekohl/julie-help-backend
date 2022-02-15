@@ -127,3 +127,12 @@ create-seed-file:
 seed:
 	@echo "+ $@"
 	@knex seed:run --knexfile knexfile.ts
+
+#
+# Test
+# - Run all test files
+#
+.PHONY: run-tests
+run-tests:
+	@echo "+ $@"
+	@jest
