@@ -1,5 +1,4 @@
 import request from 'supertest';
-import faker from 'faker';
 import app from 'app';
 
 describe("Offices", () => {
@@ -10,7 +9,7 @@ describe("Offices", () => {
     })
 
     it('should show a single', async () => {
-        const response = await request(app).get("/offices/1");
+        const response = await request(app).get("/offices/2");
 
         expect(response.body).toHaveProperty("name");
         expect(response.body).toHaveProperty("type");
