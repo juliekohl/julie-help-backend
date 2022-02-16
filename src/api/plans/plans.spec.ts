@@ -19,12 +19,22 @@ describe("Plans", () => {
 
     it("should show a single with coworkers", async () => {
         const response = await request(app).get("/plans/5");
-        console.log(response.body);
+
+        expect(response.body).toHaveProperty("name");
+        expect(response.body).toHaveProperty("value");
+        expect(response.body).not.toHaveProperty("message");
     })
 
     it("should create", async () => {
+        const newOffice = await request(app).post("/offices").send({
+            coworking_id: 1,
+            name: "Name Test",
+            officestype_id: 1
+        });
+
+        const newOfficeId = newOffice.body.id;
         const response = await request(app).post("/plans").send({
-            office_id: 1,
+            office_id: newOfficeId,
             name: "Name Test",
             value: 100
         });
@@ -42,8 +52,15 @@ describe("Plans", () => {
     })
 
     it("should delete", async () => {
+        const newOffice = await request(app).post("/offices").send({
+            coworking_id: 1,
+            name: "Name Test",
+            officestype_id: 1
+        });
+
+        const newOfficeId = newOffice.body.id;
         const newPlan = await request(app).post("/plans").send({
-            office_id: 1,
+            office_id: newOfficeId,
             name: "Name Test",
             value: faker.datatype.number()
         });
