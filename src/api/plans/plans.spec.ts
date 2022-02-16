@@ -19,7 +19,10 @@ describe("Plans", () => {
 
     it("should show a single with coworkers", async () => {
         const response = await request(app).get("/plans/5");
-        console.log(response.body);
+
+        expect(response.body).toHaveProperty("name");
+        expect(response.body).toHaveProperty("value");
+        expect(response.body).not.toHaveProperty("message");
     })
 
     it("should create", async () => {
