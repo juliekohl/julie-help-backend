@@ -14,7 +14,7 @@ export async function seed(knex: Knex): Promise<void> {
             id: i,
             office_id: faker.datatype.number({
                 min: 1,
-                max: 200
+                max: 4
             }),
             name: faker.name.findName(),
             value: faker.datatype.number(),

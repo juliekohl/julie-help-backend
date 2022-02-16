@@ -13,7 +13,7 @@ export async function seed(knex: Knex): Promise<void> {
         rows.push({
             coworking_id: faker.datatype.number({
                 min: 1,
-                max: 10
+                max: 4
             }),
             user_id: i,
         });
