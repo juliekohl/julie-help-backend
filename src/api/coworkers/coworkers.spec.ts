@@ -1,7 +1,6 @@
 import request from 'supertest';
 import faker from 'faker';
 import app from 'app';
-import {log} from "util";
 
 describe("coworkers", () => {
     it("should show all", async () => {
@@ -20,7 +19,13 @@ describe("coworkers", () => {
 
     it("should show a single with plans", async () => {
         const response = await request(app).get("/coworkers/1");
-        console.log(response.body);
+
+        expect(response.body).toHaveProperty("name");
+        expect(response.body).toHaveProperty("email");
+        expect(response.body).toHaveProperty("planId");
+        expect(response.body).toHaveProperty("planName");
+        expect(response.body).toHaveProperty("value");
+        expect(response.body).not.toHaveProperty("message");
     })
 
     it("should create", async () => {
