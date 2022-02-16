@@ -5,7 +5,7 @@ describe("login", () => {
     let newCoworkerId = null;
 
     beforeEach(async () => {
-        const response = await request(app).post("/coworkers").send({
+        const response = await request(app).post("/teams").send({
             coworking_id: 1,
             name: "Test Jest",
             email: "jesttest@gmail.com",
@@ -16,7 +16,7 @@ describe("login", () => {
     })
 
     afterEach(() => {
-        request(app).delete(`/coworkers/${newCoworkerId}`)
+        request(app).delete(`/teams/${newCoworkerId}`)
     })
 
     it("should login", async () => {
