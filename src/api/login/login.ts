@@ -15,8 +15,9 @@ export const login = (app, db) => {
 
             // Select User
             let user = await db
-                .select("*")
+                .select("users.name", "teams.id")
                 .table("users")
+                .join("teams", "users.id", "teams.user_id")
                 .where({
                     email,
                     password: hash
