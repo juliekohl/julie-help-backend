@@ -26,6 +26,7 @@ export const login = (app, db) => {
 
             if (!userResult[0]) {
                 res.json({ message: 'False' });
+                return;
             }
 
             res.json({
