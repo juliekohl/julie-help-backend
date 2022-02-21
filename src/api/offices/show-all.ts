@@ -5,16 +5,7 @@ export const showAll= (app, db) => {
      */
     app.get('/offices', async (req, res) => {
         try {
-            const officeId: number = Number(req.query.office_id);
-
-            // Get coworking_id
-            const office = await db
-                .select("coworking_id")
-                .table("offices")
-                .where({id: officeId});
-
-            const officeResult = await office;
-            const coworkingId: number = officeResult[0].coworking_id;
+            const coworkingId: number = Number(req.query.coworking_id);
 
             // Get offices of coworking_id
             const offices = await db
