@@ -62,4 +62,9 @@ describe("coworkers", () => {
 
         expect(response.body.message).toBe("Success");
     })
+
+    it("should return chart data", async () => {
+        const response = await request(app).get("/coworkers/chart/1");
+        console.log(2, response.body);
+    })
 })

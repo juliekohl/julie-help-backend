@@ -15,7 +15,11 @@ export const login = (app, db) => {
 
             // Select User
             let user = await db
-                .select("users.name", "teams.id")
+                .select(
+                    "users.name",
+                    "teams.id",
+                    "teams.coworking_id"
+                )
                 .table("users")
                 .join("teams", "users.id", "teams.user_id")
                 .where({
@@ -33,7 +37,8 @@ export const login = (app, db) => {
             res.json({
                 message: 'Success',
                 id: userResult[0].id,
-                name: userResult[0].name
+                name: userResult[0].name,
+                coworking_id: userResult[0].coworking_id
             });
 
         } catch (err) {

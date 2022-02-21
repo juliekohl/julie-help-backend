@@ -26,6 +26,8 @@ describe("login", () => {
         });
 
         expect(response.body.message).toBe("Success");
+        expect(response.body.name).toBe("Test Jest");
+        expect(response.body.coworking_id).toBe(1);
     })
 
     it("should not login", async () => {
