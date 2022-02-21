@@ -5,16 +5,7 @@ export const showAll= (app, db) => {
      */
     app.get('/teams', async (req, res) => {
         try {
-            const teamId: number = Number(req.query.team_id);
-
-            // Get coworking_id
-            const team = await db
-                .select("coworking_id")
-                .table("teams")
-                .where({id: teamId});
-
-            const teamResult = await team;
-            const coworkingId: number = teamResult[0].coworking_id;
+            const coworkingId: number = Number(req.query.coworking_id);
 
             // Get teams of coworking_id
             const teams = await db

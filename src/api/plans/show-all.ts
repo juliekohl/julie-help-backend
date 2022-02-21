@@ -5,22 +5,14 @@ export const showAll= (app, db) => {
      */
     app.get('/plans', async (req, res) => {
        try {
-           const planId: number = Number(req.query.plan_id);
-
-           // Get office_id
-           const plan = await db
-               .select("office_id")
-               .table("plans")
-               .where({id: planId});
-
-           const planResult = await plan;
-           const officeId: number = planResult[0].office_id;
+           const coworkingId: number = Number(req.query.coworking_id);
 
            // Get plans of office_id
            const plans = await db
-               .select("plans.id", "name", "value")
+               .select("plans.id", "plans.name", "value")
                .table("plans")
-               .where({office_id: officeId});
+               .join("offices", "plans.office_id", "=", "offices.id")
+               .where({coworking_id: coworkingId});
 
            res.json(plans);
        } catch (err) {
