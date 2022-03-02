@@ -53,7 +53,7 @@ describe("coworkers", () => {
         const newCoworker = await request(app).post("/coworkers").send({
             coworking_id: 1,
             name: "Name Delete",
-            email: faker.internet.email(),
+            email: 'coworker_' + faker.internet.email(),
             password: "secret"
         });
 
