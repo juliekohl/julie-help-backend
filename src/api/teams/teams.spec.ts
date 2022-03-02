@@ -41,7 +41,7 @@ describe("teams", () => {
         const newTeam = await request(app).post("/teams").send({
             coworking_id: 1,
             name: "Name Delete",
-            email: faker.internet.email(),
+            email: 'team_' + faker.internet.email(),
             password: "secret"
         });
 
