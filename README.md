@@ -21,7 +21,7 @@ Node.JS, Express, TypeScript, MySQL, Knex.JS, Faker.JS, Crypto.JS, and Jest.
 
 ## Installation
 
-Run the following Makefile commands:
+Run the following commands:
 
 ```
 1. make run setup-docker
