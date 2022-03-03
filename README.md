@@ -21,16 +21,13 @@ Node.JS, Express, TypeScript, MySQL, Knex.JS, Faker.JS, Crypto.JS, and Jest.
 
 ## Installation
 
-# Run the following Makefile commands:
+Run the following Makefile commands:
 
-1. $ make run setup-docker
-
-2. $ npm install
-
-3. $ make run build-db
-
-4. $ make run create-dotenv
-
-5. $ npm run server
-
-6. $ make run-tests
+```
+1. make run setup-docker
+2. npm install
+3. make run build-db
+4. make run create-dotenv
+5. npm run server
+6. make run-tests
+```
