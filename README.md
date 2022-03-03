@@ -13,9 +13,6 @@ The project is a coworking management system which brings a modern interface usi
 
 I hope you enjoy the experience!
 
-Front-end repository: https://github.com/juliekohl/julie-help-frontend
-Video demo: https://www.youtube.com/watch?v=xioKcfLxMdA
-
 ## Stack
 
 Node.JS, Express, TypeScript, MySQL, Knex.JS, Faker.JS, Crypto.JS, and Jest.
@@ -32,3 +29,9 @@ Run the following commands:
 5. npm run server
 6. make run-tests
 ```
+
+### Links
+
+Front-end repository: https://github.com/juliekohl/julie-help-frontend
+
+Video demo: https://www.youtube.com/watch?v=xioKcfLxMdA
