@@ -1,5 +1,3 @@
-## julie-help-backend
-
 # Julie.help! - Backend
 
 Hey There!
@@ -24,10 +22,10 @@ Node.JS, Express, TypeScript, MySQL, Knex.JS, Faker.JS, Crypto.JS, and Jest.
 Run the following commands:
 
 ```
-1. make run setup-docker
+1. make setup-docker
 2. npm install
-3. make run build-db
-4. make run create-dotenv
+3. make build-db
+4. make create-dotenv
 5. npm run server
 6. make run-tests
 ```
