@@ -1,6 +1,6 @@
 # Julie.help! - Backend
 
-Hey There!
+Hey there!
 
 Welcome to Julie.help!
 
