@@ -32,6 +32,8 @@ Run the following commands:
 
 ### Links
 
+Storybook: https://621664a7961531003ab6b7d3-cupullqnvv.chromatic.com/?path=/story/example-introduction--page 
+
 Front-end repository: https://github.com/juliekohl/julie-help-frontend
 
 Video demo: https://www.youtube.com/watch?v=xioKcfLxMdA
